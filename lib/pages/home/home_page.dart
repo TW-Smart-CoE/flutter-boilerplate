@@ -8,23 +8,57 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return Scaffold(
-      // 使用Obx(()=>每当改变计数时，就更新Text()。
       appBar: AppBar(
-        title: Obx(() => Text("Clicks: ${controller.count}")),
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: const Text('Flutter Demo'),
       ),
-
-      // 用一个简单的Get.to()即可代替Navigator.push那8行，无需上下文！
       body: Center(
-        child: ElevatedButton(
-          child: const Text("Go to Other"),
-          onPressed: () => Get.toNamed(Routes.OTHER),
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Obx(() => Text(
+                  '${controller.count}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )),
+            ElevatedButton(
+              child: const Text('Go to Other'),
+              onPressed: () => Get.toNamed(Routes.OTHER),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.increment,
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
