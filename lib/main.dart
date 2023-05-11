@@ -3,12 +3,14 @@ import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+final myApp = GetMaterialApp(
+  initialRoute: Routes.HOME,
+  getPages: AppPages.pages,
+  theme: ThemeData.light(),
+  darkTheme: ThemeData.dark(),
+  debugShowCheckedModeBanner: false,
+);
+
 void main() async {
-  runApp(GetMaterialApp(
-    initialRoute: Routes.HOME,
-    getPages: AppPages.pages,
-    theme: ThemeData.light(),
-    darkTheme: ThemeData.dark(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(myApp);
 }

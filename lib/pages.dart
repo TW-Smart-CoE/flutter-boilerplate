@@ -1,3 +1,4 @@
+import 'package:first_demo/pages/home/home_controller.dart';
 import 'package:first_demo/pages/home/home_page.dart';
 import 'package:first_demo/pages/other/other_page.dart';
 import 'package:first_demo/routes.dart';
@@ -8,12 +9,11 @@ abstract class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => const HomePage(),
-      // bindings: [HomeBinding()]
+      binding: homeBinding,
     ),
     GetPage(
       name: Routes.OTHER,
       page: () => const OtherPage(),
-      // bindings: [HomeBinding()]
     ),
   ];
 }
