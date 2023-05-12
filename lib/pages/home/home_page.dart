@@ -1,4 +1,5 @@
 import 'package:first_demo/pages/home/home_controller.dart';
+import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('Flutter Demo'),
+        title: Text(stringRes(R.app_name)),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -40,15 +41,13 @@ class HomePage extends GetView<HomeController> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            Text(stringRes(R.home_main_tip)),
             Obx(() => Text(
                   '${controller.count}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 )),
             ElevatedButton(
-              child: const Text('Go to Other'),
+              child: Text(stringRes(R.home_btn_to_other)),
               onPressed: () => Get.toNamed(Routes.OTHER),
             ),
           ],

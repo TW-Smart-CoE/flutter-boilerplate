@@ -1,3 +1,4 @@
+import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/res/theme/themes.dart';
 import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,9 @@ final myApp = GetMaterialApp(
   darkTheme: darkTheme,
   getPages: AppPages.pages,
   initialRoute: Routes.HOME,
+  locale: StringResources.locale,
+  fallbackLocale: StringResources.fallbackLocale,
+  translations: StringResources(),
 );
 
 void main() async {
