@@ -1,3 +1,4 @@
+import 'package:first_demo/common/di/global_binding.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/res/theme/themes.dart';
 import 'package:first_demo/routes.dart';
@@ -9,6 +10,7 @@ final myApp = GetMaterialApp(
   theme: lightTheme,
   darkTheme: darkTheme,
   getPages: AppPages.pages,
+  initialBinding: GlobalBinding(),
   initialRoute: Routes.HOME,
   locale: StringResources.locale,
   fallbackLocale: StringResources.fallbackLocale,
