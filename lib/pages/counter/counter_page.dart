@@ -1,11 +1,10 @@
-import 'package:first_demo/pages/home/home_controller.dart';
+import 'package:first_demo/pages/counter/counter_controller.dart';
 import 'package:first_demo/res/string/strings.dart';
-import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+class CounterPage extends GetView<CounterController> {
+  const CounterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(context) {
@@ -19,7 +18,7 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(stringRes(R.app_name)),
+        title: Text(stringRes(R.counter_page_title)),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -41,15 +40,11 @@ class HomePage extends GetView<HomeController> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(stringRes(R.home_main_tip)),
+            Text(stringRes(R.counter_main_tip)),
             Obx(() => Text(
                   '${controller.count}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 )),
-            ElevatedButton(
-              child: Text(stringRes(R.home_btn_to_other)),
-              onPressed: () => Get.toNamed(Routes.OTHER),
-            ),
           ],
         ),
       ),

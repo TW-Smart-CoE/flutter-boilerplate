@@ -27,6 +27,6 @@ stringRes(R key) => key.name.tr;
 // keys for string resources
 enum R {
   app_name,
-  home_main_tip,
-  home_btn_to_other,
+  counter_page_title,
+  counter_main_tip,
 }
