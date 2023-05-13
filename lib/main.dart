@@ -11,7 +11,7 @@ final myApp = GetMaterialApp(
   darkTheme: darkTheme,
   getPages: AppPages.pages,
   initialBinding: GlobalBinding(),
-  initialRoute: Routes.COUNTER,
+  initialRoute: Routes.HOME,
   locale: StringResources.locale,
   fallbackLocale: StringResources.fallbackLocale,
   translations: StringResources(),
