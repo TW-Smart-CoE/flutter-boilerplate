@@ -29,4 +29,6 @@ enum R {
   app_name,
   counter_page_title,
   counter_main_tip,
+  animal_image_page_title,
+  loading,
 }
