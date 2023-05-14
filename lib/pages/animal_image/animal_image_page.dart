@@ -34,7 +34,7 @@ class AnimalImagePage extends GetView<AnimalImageController> {
             itemBuilder: (context, index) {
               final animal = animals[index];
               return Image.network(
-                animal.url ?? "",
+                animal.url ?? '',
                 fit: BoxFit.cover,
               );
             },
