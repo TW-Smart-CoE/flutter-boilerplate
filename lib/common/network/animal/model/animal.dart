@@ -4,14 +4,12 @@ part 'animal.g.dart';
 
 @JsonSerializable()
 class Animal {
-  final List<dynamic>? breeds;
   final String? id;
   final String? url;
-  final dynamic width;
-  final dynamic height;
+  final int? width;
+  final int? height;
 
   const Animal({
-    this.breeds,
     this.id,
     this.url,
     this.width,
