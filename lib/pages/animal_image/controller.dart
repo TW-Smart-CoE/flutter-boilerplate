@@ -17,11 +17,15 @@ class AnimalImageController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    await load();
+  }
+
+  Future<void> load() async {
     try {
       animals.value = await _repository.getAnimals();
     } catch (e) {
       logger.e(e);
-      Get.snackbar('Network Error', e.toString());
+      // Get.snackbar('Network Error', e.toString());
     }
   }
 }
