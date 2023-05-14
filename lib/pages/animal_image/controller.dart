@@ -1,6 +1,6 @@
 import 'package:first_demo/common/network/animal/model/animal.dart';
 import 'package:first_demo/common/utils/logger.dart';
-import 'package:first_demo/pages/animal_image/animal_image_repository.dart';
+import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:get/get.dart';
 
 final animalImageBinding = BindingsBuilder(() {

@@ -1,10 +1,8 @@
-// ignore_for_file: constant_identifier_names
-
-import 'package:first_demo/pages/animal_image/animal_image_controller.dart';
-import 'package:first_demo/pages/animal_image/animal_image_page.dart';
-import 'package:first_demo/pages/counter/counter_controller.dart';
-import 'package:first_demo/pages/counter/counter_page.dart';
-import 'package:first_demo/pages/home/home_page.dart';
+import 'package:first_demo/pages/animal_image/controller.dart';
+import 'package:first_demo/pages/animal_image/page.dart';
+import 'package:first_demo/pages/counter/controller.dart';
+import 'package:first_demo/pages/counter/page.dart';
+import 'package:first_demo/pages/home/page.dart';
 import 'package:get/get.dart';
 
 abstract class Routes {

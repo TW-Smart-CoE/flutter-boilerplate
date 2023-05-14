@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:first_demo/common/network/animal/animal_api.dart';
+import 'package:first_demo/common/network/animal/api.dart';
 import 'package:first_demo/common/network/animal/model/animal.dart';
 
 class AnimalImageRepository {

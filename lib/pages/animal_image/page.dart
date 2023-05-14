@@ -1,4 +1,4 @@
-import 'package:first_demo/pages/animal_image/animal_image_controller.dart';
+import 'package:first_demo/pages/animal_image/controller.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

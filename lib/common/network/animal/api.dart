@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:first_demo/common/network/animal/model/animal.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'animal_api.g.dart';
+part 'api.g.dart';
 
 @RestApi()
 abstract class AnimalApi {

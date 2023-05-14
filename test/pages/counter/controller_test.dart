@@ -1,4 +1,4 @@
-import 'package:first_demo/pages/counter/counter_controller.dart';
+import 'package:first_demo/pages/counter/controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:ui';
 
 import 'package:first_demo/res/string/en-US.dart';
