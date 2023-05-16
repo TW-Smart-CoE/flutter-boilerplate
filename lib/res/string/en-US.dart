@@ -8,4 +8,5 @@ const Map<R, String> enUS = {
   R.counter_main_tip: 'You have pushed the button this many times:',
   R.animal_image_page_title: 'Animal Image',
   R.loading: 'Loading...',
+  R.dev_menu: 'Dev Menu',
 };

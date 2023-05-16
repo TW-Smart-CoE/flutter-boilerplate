@@ -1,3 +1,4 @@
+import 'package:first_demo/common/scaffold/base_scaffold.dart';
 import 'package:first_demo/pages/animal_image/controller.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,8 @@ class AnimalImagePage extends GetView<AnimalImageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(stringRes(R.animal_image_page_title)),
-      ),
+    return BaseScaffold(
+      title: stringRes(R.animal_image_page_title),
       body: Obx(() {
         final animals = controller.animals();
         if (animals == null) {

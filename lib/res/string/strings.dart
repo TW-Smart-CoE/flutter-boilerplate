@@ -29,4 +29,5 @@ enum R {
   counter_main_tip,
   animal_image_page_title,
   loading,
+  dev_menu,
 }
