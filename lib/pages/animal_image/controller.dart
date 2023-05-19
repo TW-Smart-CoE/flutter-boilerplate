@@ -1,5 +1,5 @@
+import 'package:first_demo/common/async_loader/data_controller.dart';
 import 'package:first_demo/common/network/animal/model/animal.dart';
-import 'package:first_demo/common/utils/logger.dart';
 import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:get/get.dart';
 
@@ -7,25 +7,11 @@ final animalImageBinding = BindingsBuilder(() {
   Get.lazyPut(() => AnimalImageController(AnimalImageRepository(Get.find())));
 });
 
-class AnimalImageController extends GetxController {
+class AnimalImageController extends DataController<List<Animal>> {
   final AnimalImageRepository _repository;
-
-  final animals = Rx<List<Animal>?>(null);
 
   AnimalImageController(this._repository);
 
   @override
-  void onInit() async {
-    super.onInit();
-    await load();
-  }
-
-  Future<void> load() async {
-    try {
-      animals.value = await _repository.getAnimals();
-    } catch (e) {
-      logger.e(e);
-      // Get.snackbar('Network Error', e.toString());
-    }
-  }
+  Future<List<Animal>> fetch() => _repository.getAnimals();
 }

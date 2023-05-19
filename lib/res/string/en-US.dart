@@ -9,4 +9,9 @@ const Map<R, String> enUS = {
   R.animal_image_page_title: 'Animal Image',
   R.loading: 'Loading...',
   R.dev_menu: 'Dev Menu',
+  R.connection_error_title: 'Connection Error',
+  R.connection_error_subtitle: 'Please check your network connection.',
+  R.loading_or_parsing_error_title: 'Loading or Parsing Error',
+  R.loading_or_parsing_error_subtitle: 'Oops, something went wrong.',
+  R.retry: 'Retry',
 };

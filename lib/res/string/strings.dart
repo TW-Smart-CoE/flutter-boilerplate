@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:first_demo/res/string/en-US.dart';
@@ -5,7 +6,11 @@ import 'package:first_demo/res/string/zh-CN.dart';
 import 'package:get/get.dart';
 
 class StringResources extends Translations {
-  static Locale? get locale => window.locale;
+  static Locale? get locale {
+    final local = Platform.localeName.split('_');
+    return Locale.fromSubtags(languageCode: local[0], countryCode: local[1]);
+  }
+
   static const fallbackLocale = Locale('en', 'US');
 
   static final Map<String, String> _enUS =
@@ -30,4 +35,9 @@ enum R {
   animal_image_page_title,
   loading,
   dev_menu,
+  connection_error_title,
+  connection_error_subtitle,
+  loading_or_parsing_error_title,
+  loading_or_parsing_error_subtitle,
+  retry,
 }

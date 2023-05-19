@@ -1,3 +1,5 @@
+import 'package:first_demo/common/async_loader/async_load_processor.dart';
+import 'package:first_demo/common/async_loader/auto_load_controller.dart';
 import 'package:first_demo/common/scaffold/base_scaffold.dart';
 import 'package:first_demo/pages/animal_image/controller.dart';
 import 'package:first_demo/res/string/strings.dart';
@@ -11,35 +13,27 @@ class AnimalImagePage extends GetView<AnimalImageController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       title: stringRes(R.animal_image_page_title),
-      body: Obx(() {
-        final animals = controller.animals();
-        if (animals == null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: 16),
-                Text(stringRes(R.loading)),
-              ],
-            ),
-          );
-        } else {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-            ),
-            itemCount: animals.length,
-            itemBuilder: (context, index) {
-              final animal = animals[index];
-              return Image.network(
-                animal.url ?? '',
-                fit: BoxFit.cover,
-              );
-            },
-          );
-        }
-      }),
+      body: AsyncLoadProcessor(
+        AutoLoadController(controller),
+        content: (data) => _animalImageContent(controller),
+      ),
+    );
+  }
+
+  Widget _animalImageContent(AnimalImageController controller) {
+    final animals = controller.data;
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+      ),
+      itemCount: animals.length,
+      itemBuilder: (context, index) {
+        final animal = animals[index];
+        return Image.network(
+          animal.url ?? '',
+          fit: BoxFit.cover,
+        );
+      },
     );
   }
 }

@@ -29,30 +29,14 @@ void main() {
     controller = AnimalImageController(repository);
   });
 
-  test('animals should start at null', () {
-    // then
-    expect(controller.animals(), null);
-  });
-
   test('animals should be correct if load success', () async {
     // given
     when(repository.getAnimals()).thenAnswer((_) async => animals);
 
     // when
-    await controller.load();
+    final res = await controller.fetch();
 
     // then
-    expect(controller.animals(), animals);
-  });
-
-  test('animals should be null if load failed', () async {
-    // given
-    when(repository.getAnimals()).thenThrow(Exception());
-
-    // when
-    await controller.load();
-
-    // then
-    expect(controller.animals(), null);
+    expect(res, animals);
   });
 }
