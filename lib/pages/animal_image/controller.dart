@@ -4,7 +4,7 @@ import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:get/get.dart';
 
 final animalImageBinding = BindingsBuilder(() {
-  Get.lazyPut(() => AnimalImageController(AnimalImageRepository(Get.find())));
+  Get.lazyPut(() => AnimalImageController(AnimalImageRepository()));
 });
 
 class AnimalImageController extends DataController<List<Animal>> {

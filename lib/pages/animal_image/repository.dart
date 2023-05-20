@@ -2,11 +2,13 @@ import 'dart:math';
 
 import 'package:first_demo/common/network/animal/api.dart';
 import 'package:first_demo/common/network/animal/model/animal.dart';
+import 'package:get/get.dart';
 
 class AnimalImageRepository {
   final AnimalApi _animalApi;
 
-  AnimalImageRepository(this._animalApi);
+  AnimalImageRepository({AnimalApi? animalApi})
+      : _animalApi = animalApi ?? Get.find();
 
   Future<List<Animal>> getCats() => _animalApi.getAnimals('cat');
 
