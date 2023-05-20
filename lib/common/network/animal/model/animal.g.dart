@@ -7,10 +7,10 @@ part of 'animal.dart';
 // **************************************************************************
 
 Animal _$AnimalFromJson(Map<String, dynamic> json) => Animal(
-      id: json['id'] as String?,
-      url: json['url'] as String?,
-      width: json['width'] as int?,
-      height: json['height'] as int?,
+      json['id'] as String?,
+      json['url'] as String?,
+      json['width'] as int?,
+      json['height'] as int?,
     );
 
 Map<String, dynamic> _$AnimalToJson(Animal instance) => <String, dynamic>{

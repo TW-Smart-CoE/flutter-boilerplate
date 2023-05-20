@@ -35,7 +35,6 @@ class MockAnimalImageRepository extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i4.Animal>>.value(<_i4.Animal>[]),
       ) as _i3.Future<List<_i4.Animal>>);
-
   @override
   _i3.Future<List<_i4.Animal>> getDogs() => (super.noSuchMethod(
         Invocation.method(
@@ -46,7 +45,6 @@ class MockAnimalImageRepository extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i4.Animal>>.value(<_i4.Animal>[]),
       ) as _i3.Future<List<_i4.Animal>>);
-
   @override
   _i3.Future<List<_i4.Animal>> getAnimals() => (super.noSuchMethod(
         Invocation.method(

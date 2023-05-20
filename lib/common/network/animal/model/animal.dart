@@ -9,12 +9,12 @@ class Animal {
   final int? width;
   final int? height;
 
-  const Animal({
+  const Animal(
     this.id,
     this.url,
     this.width,
     this.height,
-  });
+  );
 
   factory Animal.fromJson(Map<String, dynamic> json) => _$AnimalFromJson(json);
 

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:first_demo/common/network/animal/api.dart';
 import 'package:first_demo/common/network/dio_client.dart';
+import 'package:first_demo/common/network/moments/api.dart';
 import 'package:get/get.dart';
 
 class GlobalBinding extends Bindings {
@@ -9,6 +10,7 @@ class GlobalBinding extends Bindings {
     Get.put(DioClient(), permanent: true);
     // apis
     Get.lazyPut(() => AnimalApi(findDio()), fenix: true);
+    Get.lazyPut(() => MomentsApi(findDio()), fenix: true);
   }
 
   Dio findDio() => Get.find<DioClient>().dio;

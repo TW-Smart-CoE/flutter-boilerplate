@@ -13,14 +13,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   Get.testMode = true;
 
-  final List<Animal> animals = List.filled(
-      5,
-      const Animal(
-        id: 'id',
-        url: 'image_url',
-        width: 100,
-        height: 100,
-      ));
+  final List<Animal> animals =
+      List.filled(5, const Animal('id', 'image_url', 100, 100));
   final repository = MockAnimalImageRepository();
 
   late AnimalImageController controller;
