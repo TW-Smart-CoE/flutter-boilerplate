@@ -1,0 +1,23 @@
+import 'package:first_demo/common/async_loader/data_controller.dart';
+import 'package:first_demo/pages/moments/tweet/controller.dart';
+import 'package:first_demo/pages/moments/user/controller.dart';
+
+class MomentsController extends DataController<Object> {
+  final UserController userController;
+  final TweetController tweetController;
+
+  MomentsController({
+    UserController? userController,
+    TweetController? tweetController,
+  })  : userController = userController ?? UserController(),
+        tweetController = tweetController ?? TweetController();
+
+  @override
+  Future<Object> fetch() async {
+    await Future.wait([
+      userController.fetch().then((value) => userController.data = value),
+      tweetController.fetch().then((value) => tweetController.data = value),
+    ]);
+    return Object();
+  }
+}

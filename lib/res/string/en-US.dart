@@ -14,4 +14,5 @@ const Map<R, String> enUS = {
   R.loading_or_parsing_error_title: 'Loading or Parsing Error',
   R.loading_or_parsing_error_subtitle: 'Oops, something went wrong.',
   R.retry: 'Retry',
+  R.moments_page_title: 'Moments',
 };

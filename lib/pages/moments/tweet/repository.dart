@@ -1,6 +1,6 @@
 import 'package:first_demo/common/network/moments/api.dart';
 import 'package:first_demo/common/network/moments/model/tweet.dart';
-import 'package:first_demo/pages/moments/tweet_store.dart';
+import 'package:first_demo/pages/moments/tweet/store.dart';
 import 'package:get/get.dart';
 
 class TweetRepository {

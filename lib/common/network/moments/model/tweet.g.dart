@@ -14,9 +14,9 @@ Tweet _$TweetFromJson(Map<String, dynamic> json) => Tweet(
       json['sender'] == null
           ? null
           : Sender.fromJson(json['sender'] as Map<String, dynamic>),
-      json['comments'] == null
-          ? null
-          : Comment.fromJson(json['comments'] as Map<String, dynamic>),
+      (json['comments'] as List<dynamic>?)
+          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$TweetToJson(Tweet instance) => <String, dynamic>{

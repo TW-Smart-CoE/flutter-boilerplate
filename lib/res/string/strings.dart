@@ -40,4 +40,5 @@ enum R {
   loading_or_parsing_error_title,
   loading_or_parsing_error_subtitle,
   retry,
+  moments_page_title,
 }

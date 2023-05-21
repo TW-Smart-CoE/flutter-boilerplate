@@ -10,7 +10,7 @@ class Tweet {
   final String? content;
   final List<Image>? images;
   final Sender? sender;
-  final Comment? comments;
+  final List<Comment>? comments;
 
   const Tweet(this.content, this.images, this.sender, this.comments);
 
