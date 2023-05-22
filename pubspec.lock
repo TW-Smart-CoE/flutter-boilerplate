@@ -214,6 +214,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_constraintlayout:
+    dependency: "direct main"
+    description:
+      name: flutter_constraintlayout
+      sha256: "07517f9ab83c943673163a44e31855cd317fe2d62bb54e212830480f1a143ad8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.3-stable"
   flutter_lints:
     dependency: "direct dev"
     description:
