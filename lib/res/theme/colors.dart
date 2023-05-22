@@ -7,3 +7,5 @@ const ColorScheme lightColor = ColorScheme.light(
 const ColorScheme darkColor = ColorScheme.dark();
 
 const lightPrimary = Colors.blue;
+
+const momentsUserNameColor = Color(0xFF505D8A);

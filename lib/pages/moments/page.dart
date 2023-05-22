@@ -20,11 +20,13 @@ class MomentsPage extends StatelessWidget {
       title: stringRes(R.moments_page_title),
       body: AsyncLoadProcessor(
         AutoLoadController(_controller),
-        content: (data) => Column(
-          children: [
-            UserView(userController: _controller.userController),
-            TweetView(tweetController: _controller.tweetController),
+        content: (data) => NestedScrollView(
+          headerSliverBuilder: (_, __) => [
+            SliverToBoxAdapter(
+              child: UserView(userController: _controller.userController),
+            ),
           ],
+          body: TweetView(tweetController: _controller.tweetController),
         ),
       ),
     );
