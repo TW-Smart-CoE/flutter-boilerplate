@@ -5,18 +5,17 @@ import 'package:get/get.dart';
 // ignore: non_constant_identifier_names
 Widget LoadingPlaceholder() {
   return Container(
+    width: double.infinity,
+    height: double.infinity,
     color: Get.theme.colorScheme.background,
-    child: Expanded(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircularProgressIndicator(),
-            const SizedBox(height: 16),
-            Text(stringRes(R.loading)),
-          ],
-        ),
-      ),
+    alignment: Alignment.center,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const CircularProgressIndicator(),
+        const SizedBox(height: 16),
+        Text(stringRes(R.loading)),
+      ],
     ),
   );
 }
