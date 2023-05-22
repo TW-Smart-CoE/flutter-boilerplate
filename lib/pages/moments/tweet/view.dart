@@ -44,15 +44,17 @@ class TweetView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                tweet.sender?.nick ?? '',
+                tweet.sender?.nick ?? tweet.sender?.username ?? '',
                 style: theme.textTheme.titleLarge?.copyWith(
                     color: momentsUserNameColor, fontWeight: FontWeight.normal),
               ),
-              Text(
-                tweet.content ?? 'No Content',
-                style: theme.textTheme.titleSmall
-                    ?.copyWith(fontWeight: FontWeight.normal),
-              ),
+              if (tweet.content != null && tweet.content!.isNotEmpty) ...[
+                Text(
+                  tweet.content!,
+                  style: theme.textTheme.titleSmall
+                      ?.copyWith(fontWeight: FontWeight.normal),
+                )
+              ],
             ],
           ),
         ),
