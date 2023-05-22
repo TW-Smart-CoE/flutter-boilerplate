@@ -1,3 +1,4 @@
+import 'package:first_demo/common/network/moments/model/comment.dart';
 import 'package:first_demo/common/network/moments/model/tweet.dart';
 import 'package:first_demo/pages/moments/tweet/controller.dart';
 import 'package:first_demo/res/theme/colors.dart';
@@ -22,43 +23,78 @@ class TweetView extends StatelessWidget {
     );
   }
 
-  Widget _tweetItem(Tweet tweet) {
-    final theme = Get.theme;
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+  Widget _tweetItem(Tweet tweet) => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Image.network(
+              tweet.sender?.avatar ?? '',
+              width: 50,
+              height: 50,
+            ),
           ),
-          child: Image.network(
-            tweet.sender?.avatar ?? '',
-            width: 50,
-            height: 50,
-          ),
-        ),
-        const SizedBox(width: 15),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                tweet.sender?.nick ?? tweet.sender?.username ?? '',
-                style: theme.textTheme.titleLarge?.copyWith(
-                    color: momentsUserNameColor, fontWeight: FontWeight.normal),
-              ),
-              if (tweet.content != null && tweet.content!.isNotEmpty) ...[
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
-                  tweet.content!,
-                  style: theme.textTheme.titleSmall
-                      ?.copyWith(fontWeight: FontWeight.normal),
-                )
+                  tweet.sender?.nick ?? tweet.sender?.username ?? '',
+                  style: _theme.textTheme.titleLarge?.copyWith(
+                      color: momentsUserNameColor,
+                      fontWeight: FontWeight.normal),
+                ),
+                if (tweet.content != null && tweet.content!.isNotEmpty) ...[
+                  Text(
+                    tweet.content!,
+                    style: _theme.textTheme.titleSmall
+                        ?.copyWith(fontWeight: FontWeight.normal),
+                  )
+                ],
+                if (tweet.comments != null && tweet.comments!.isNotEmpty) ...[
+                  _comments(tweet.comments!)
+                ],
               ],
-            ],
+            ),
           ),
+        ]),
+      );
+
+  Widget _comments(List<Comment> comments) => Container(
+        width: double.infinity,
+        decoration: ShapeDecoration(
+            color: Colors.grey[200],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            )),
+        margin: const EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: comments
+              .where((it) => it.content != null && it.content!.isNotEmpty)
+              .map((comment) => _commentItem(comment))
+              .toList(),
         ),
-      ]),
-    );
-  }
+      );
+
+  Widget _commentItem(Comment comment) => Text.rich(TextSpan(
+        style: _theme.textTheme.titleSmall?.copyWith(height: 1.5),
+        children: [
+          TextSpan(
+            text: comment.sender?.nick ?? comment.sender?.username ?? '',
+            style: const TextStyle(color: momentsUserNameColor),
+          ),
+          const TextSpan(text: ':'),
+          const TextSpan(text: ' '),
+          TextSpan(
+              text: comment.content,
+              style: const TextStyle(fontWeight: FontWeight.normal)),
+        ],
+      ));
+
+  ThemeData get _theme => Get.theme;
 }
