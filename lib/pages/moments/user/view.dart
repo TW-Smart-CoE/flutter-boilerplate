@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/pages/moments/user/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_constraintlayout/flutter_constraintlayout.dart';
@@ -18,8 +19,8 @@ class UserView extends StatelessWidget {
     return ConstraintLayout(children: [
       Container(
         color: theme.colorScheme.secondary,
-        child: Image.network(
-          user.profileImage ?? '',
+        child: CachedNetworkImage(
+          imageUrl: user.profileImage ?? '',
           fit: BoxFit.cover,
         ),
       ).applyConstraint(
@@ -29,10 +30,10 @@ class UserView extends StatelessWidget {
       ),
       Card(
         color: theme.colorScheme.primary,
-        child: Image.network(
+        child: CachedNetworkImage(
           width: 80,
           height: 80,
-          user.avatar ?? '',
+          imageUrl: user.avatar ?? '',
           fit: BoxFit.cover,
         ),
       ).applyConstraint(

@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 class StringResources extends Translations {
   static Locale? get locale {
     final local = Platform.localeName.split('_');
-    return Locale.fromSubtags(languageCode: local[0], countryCode: local[1]);
+    return Locale.fromSubtags(
+        languageCode: local[0],
+        countryCode: local.length > 1 ? local[1] : null);
   }
 
   static const fallbackLocale = Locale('en', 'US');

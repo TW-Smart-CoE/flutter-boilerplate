@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/common/async_loader/async_load_processor.dart';
 import 'package:first_demo/common/async_loader/auto_load_controller.dart';
 import 'package:first_demo/common/scaffold/base_scaffold.dart';
@@ -29,8 +30,8 @@ class AnimalImagePage extends GetView<AnimalImageController> {
       itemCount: animals.length,
       itemBuilder: (context, index) {
         final animal = animals[index];
-        return Image.network(
-          animal.url ?? '',
+        return CachedNetworkImage(
+          imageUrl: animal.url ?? '',
           fit: BoxFit.cover,
         );
       },

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/common/network/moments/model/comment.dart';
 import 'package:first_demo/common/network/moments/model/image.dart' as model;
 import 'package:first_demo/common/network/moments/model/tweet.dart';
@@ -31,8 +32,8 @@ class TweetView extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Image.network(
-              tweet.sender?.avatar ?? '',
+            child: CachedNetworkImage(
+              imageUrl: tweet.sender?.avatar ?? '',
               width: 50,
               height: 50,
             ),
@@ -97,8 +98,8 @@ class TweetView extends StatelessWidget {
         mainAxisSpacing: 5,
         childAspectRatio: 1,
         children: images
-            .map((image) => Image.network(
-                  image.url,
+            .map((image) => CachedNetworkImage(
+                  imageUrl: image.url,
                   fit: BoxFit.cover,
                 ))
             .toList(),
