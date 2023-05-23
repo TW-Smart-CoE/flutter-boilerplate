@@ -1,4 +1,5 @@
 import 'package:first_demo/common/network/moments/model/comment.dart';
+import 'package:first_demo/common/network/moments/model/image.dart' as model;
 import 'package:first_demo/common/network/moments/model/tweet.dart';
 import 'package:first_demo/pages/moments/tweet/controller.dart';
 import 'package:first_demo/res/theme/colors.dart';
@@ -54,6 +55,9 @@ class TweetView extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.normal),
                   )
                 ],
+                if (tweet.images != null && tweet.images!.isNotEmpty) ...[
+                  _imageGrid(tweet.images!)
+                ],
                 if (tweet.comments != null && tweet.comments!.isNotEmpty) ...[
                   _comments(tweet.comments!)
                 ],
@@ -62,6 +66,45 @@ class TweetView extends StatelessWidget {
           ),
         ]),
       );
+
+  Widget _imageGrid(List<model.Image> images) {
+    final cnt = images.length;
+    final int crossAxisCount;
+    if (cnt <= 1) {
+      crossAxisCount = 1;
+    } else if (cnt <= 3) {
+      crossAxisCount = 3;
+    } else if (cnt <= 4) {
+      crossAxisCount = 2;
+    } else {
+      crossAxisCount = 3;
+    }
+
+    final double widthFactor;
+    if (crossAxisCount == 1 || crossAxisCount == 2) {
+      widthFactor = 2 / 3;
+    } else {
+      widthFactor = 1;
+    }
+
+    return FractionallySizedBox(
+      widthFactor: widthFactor,
+      child: GridView.count(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        shrinkWrap: true,
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        childAspectRatio: 1,
+        children: images
+            .map((image) => Image.network(
+                  image.url ?? '',
+                  fit: BoxFit.cover,
+                ))
+            .toList(),
+      ),
+    );
+  }
 
   Widget _comments(List<Comment> comments) => Container(
         width: double.infinity,
