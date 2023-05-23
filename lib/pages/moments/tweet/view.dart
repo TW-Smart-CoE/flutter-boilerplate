@@ -98,7 +98,7 @@ class TweetView extends StatelessWidget {
         childAspectRatio: 1,
         children: images
             .map((image) => Image.network(
-                  image.url ?? '',
+                  image.url,
                   fit: BoxFit.cover,
                 ))
             .toList(),
@@ -118,7 +118,7 @@ class TweetView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: comments
-              .where((it) => it.content != null && it.content!.isNotEmpty)
+              .where((it) => it.content.isNotEmpty)
               .map((comment) => _commentItem(comment))
               .toList(),
         ),
@@ -128,7 +128,7 @@ class TweetView extends StatelessWidget {
         style: _theme.textTheme.titleSmall?.copyWith(height: 1.5),
         children: [
           TextSpan(
-            text: comment.sender?.nick ?? comment.sender?.username ?? '',
+            text: comment.sender.nick ?? comment.sender.username ?? '',
             style: const TextStyle(color: momentsUserNameColor),
           ),
           const TextSpan(text: ':'),

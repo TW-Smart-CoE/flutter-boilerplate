@@ -5,8 +5,8 @@ part 'comment.g.dart';
 
 @JsonSerializable()
 class Comment {
-  final String? content;
-  final Sender? sender;
+  final String content;
+  final Sender sender;
 
   const Comment(
     this.content,
