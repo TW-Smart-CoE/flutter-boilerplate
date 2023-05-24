@@ -12,6 +12,7 @@ final myApp = GetMaterialApp(
   getPages: AppPages.pages,
   initialBinding: GlobalBinding(),
   initialRoute: Routes.COUNTER,
+  navigatorObservers: [GetXRouterObserver()],
   locale: StringResources.locale,
   fallbackLocale: StringResources.fallbackLocale,
   translations: StringResources(),

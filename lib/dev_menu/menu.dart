@@ -9,6 +9,7 @@ class DevMenu extends StatelessWidget {
   final _items = {
     R.counter_page_title: () => Get.toNamed(Routes.COUNTER),
     R.animal_image_page_title: () => Get.toNamed(Routes.ANIMAL_IMAGE),
+    R.moments_page_title: () => Get.toNamed(Routes.MOMENTS),
   };
 
   @override
