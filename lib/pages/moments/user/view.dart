@@ -30,6 +30,10 @@ class UserView extends StatelessWidget {
       ),
       Card(
         color: theme.colorScheme.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         child: CachedNetworkImage(
           width: 80,
           height: 80,

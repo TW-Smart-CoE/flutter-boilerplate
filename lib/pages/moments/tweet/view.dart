@@ -32,6 +32,7 @@ class TweetView extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             child: CachedNetworkImage(
               imageUrl: tweet.sender?.avatar ?? '',
               width: 50,
@@ -93,6 +94,7 @@ class TweetView extends StatelessWidget {
       child: GridView.count(
         padding: const EdgeInsets.symmetric(vertical: 5),
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: 5,
         mainAxisSpacing: 5,
