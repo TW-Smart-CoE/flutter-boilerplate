@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 class TweetView extends StatelessWidget {
   final TweetController _controller;
 
-  TweetView({TweetController? tweetController, Key? key})
-      : _controller = tweetController ?? TweetController(),
+  const TweetView(TweetController tweetController, {Key? key})
+      : _controller = tweetController,
         super(key: key);
 
   @override

@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 class UserView extends StatelessWidget {
   final UserController _controller;
 
-  UserView({UserController? userController, Key? key})
-      : _controller = userController ?? UserController(),
+  const UserView(UserController userController, {Key? key})
+      : _controller = userController,
         super(key: key);
 
   @override

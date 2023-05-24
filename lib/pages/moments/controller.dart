@@ -1,6 +1,7 @@
 import 'package:first_demo/common/async_loader/data_controller.dart';
 import 'package:first_demo/pages/moments/tweet/controller.dart';
 import 'package:first_demo/pages/moments/user/controller.dart';
+import 'package:get/get.dart';
 
 class MomentsController extends DataController<Object> {
   final UserController userController;
@@ -9,8 +10,8 @@ class MomentsController extends DataController<Object> {
   MomentsController({
     UserController? userController,
     TweetController? tweetController,
-  })  : userController = userController ?? UserController(),
-        tweetController = tweetController ?? TweetController();
+  })  : userController = userController ?? Get.put(UserController()),
+        tweetController = tweetController ?? Get.put(TweetController());
 
   @override
   Future<Object> fetch() async {

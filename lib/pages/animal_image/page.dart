@@ -7,16 +7,20 @@ import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AnimalImagePage extends GetView<AnimalImageController> {
-  const AnimalImagePage({Key? key}) : super(key: key);
+class AnimalImagePage extends StatelessWidget {
+  final AnimalImageController _controller;
+
+  AnimalImagePage({Key? key, AnimalImageController? animalImageController})
+      : _controller = animalImageController ?? Get.put(AnimalImageController()),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
       title: stringRes(R.animal_image_page_title),
       body: AsyncLoadProcessor(
-        AutoLoadController(controller),
-        content: (data) => _animalImageContent(controller),
+        Get.put(AutoLoadController(_controller)),
+        content: (data) => _animalImageContent(_controller),
       ),
     );
   }

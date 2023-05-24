@@ -4,8 +4,12 @@ import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CounterPage extends GetView<CounterController> {
-  const CounterPage({Key? key}) : super(key: key);
+class CounterPage extends StatelessWidget {
+  final CounterController _controller;
+
+  CounterPage({Key? key, CounterController? counterController})
+      : _controller = counterController ?? Get.put(CounterController()),
+        super(key: key);
 
   @override
   Widget build(context) {
@@ -33,14 +37,14 @@ class CounterPage extends GetView<CounterController> {
           children: <Widget>[
             Text(stringRes(R.counter_main_tip)),
             Obx(() => Text(
-                  '${controller.count}',
+                  '${_controller.count}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 )),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
+        onPressed: _controller.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

@@ -6,12 +6,13 @@ import 'package:first_demo/pages/moments/tweet/view.dart';
 import 'package:first_demo/pages/moments/user/view.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MomentsPage extends StatelessWidget {
   final MomentsController _controller;
 
   MomentsPage({MomentsController? momentsController, Key? key})
-      : _controller = momentsController ?? MomentsController(),
+      : _controller = momentsController ?? Get.put(MomentsController()),
         super(key: key);
 
   @override
@@ -19,14 +20,14 @@ class MomentsPage extends StatelessWidget {
     return BaseScaffold(
       title: stringRes(R.moments_page_title),
       body: AsyncLoadProcessor(
-        AutoLoadController(_controller),
+        Get.put(AutoLoadController(_controller)),
         content: (data) => NestedScrollView(
           headerSliverBuilder: (_, __) => [
             SliverToBoxAdapter(
-              child: UserView(userController: _controller.userController),
+              child: UserView(_controller.userController),
             ),
           ],
-          body: TweetView(tweetController: _controller.tweetController),
+          body: TweetView(_controller.tweetController),
         ),
       ),
     );

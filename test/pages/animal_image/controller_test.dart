@@ -20,7 +20,7 @@ void main() {
   late AnimalImageController controller;
 
   setUp(() {
-    controller = AnimalImageController(repository);
+    controller = AnimalImageController(animalImageRepository: repository);
   });
 
   test('animals should be correct if load success', () async {
