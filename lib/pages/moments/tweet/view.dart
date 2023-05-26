@@ -3,7 +3,9 @@ import 'package:first_demo/common/network/moments/model/comment.dart';
 import 'package:first_demo/common/network/moments/model/image.dart' as model;
 import 'package:first_demo/common/network/moments/model/tweet.dart';
 import 'package:first_demo/pages/moments/tweet/controller.dart';
-import 'package:first_demo/res/theme/colors.dart';
+import 'package:first_demo/res/theme/color.dart';
+import 'package:first_demo/res/theme/dimension.dart';
+import 'package:first_demo/res/theme/shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,25 +23,24 @@ class TweetView extends StatelessWidget {
     return ListView.separated(
       itemCount: tweets.length,
       itemBuilder: (_, index) => _tweetItem(tweets[index]),
-      separatorBuilder: (_, __) => const Divider(height: 1),
+      separatorBuilder: (_, __) => const Divider(height: BorderWidth.Light),
     );
   }
 
   Widget _tweetItem(Tweet tweet) => Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        margin: const EdgeInsets.symmetric(
+            horizontal: EdgeInset.S, vertical: EdgeInset.XS),
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
-            ),
+            shape: BorderShape.XS,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: CachedNetworkImage(
               imageUrl: tweet.sender?.avatar ?? '',
-              width: 50,
-              height: 50,
+              width: Size.L,
+              height: Size.L,
             ),
           ),
-          const SizedBox(width: 15),
+          const SizedBox(width: EdgeInset.S),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,12 +93,12 @@ class TweetView extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: widthFactor,
       child: GridView.count(
-        padding: const EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(vertical: EdgeInset.Smallest),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 5,
+        crossAxisSpacing: EdgeInset.Smallest,
+        mainAxisSpacing: EdgeInset.Smallest,
         childAspectRatio: 1,
         children: images
             .map((image) => CachedNetworkImage(
@@ -112,12 +113,12 @@ class TweetView extends StatelessWidget {
   Widget _comments(List<Comment> comments) => Container(
         width: double.infinity,
         decoration: ShapeDecoration(
-            color: Colors.grey[200],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
-            )),
-        margin: const EdgeInsets.only(top: 4),
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+          color: AppColorPalette.neutral.light60,
+          shape: BorderShape.XS,
+        ),
+        margin: const EdgeInsets.only(top: EdgeInset.Smallest),
+        padding: const EdgeInsets.symmetric(
+            horizontal: EdgeInset.XXS, vertical: EdgeInset.Smallest),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: comments

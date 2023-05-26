@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/pages/moments/user/controller.dart';
+import 'package:first_demo/res/theme/dimension.dart';
+import 'package:first_demo/res/theme/shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_constraintlayout/flutter_constraintlayout.dart';
 import 'package:get/get.dart';
@@ -25,18 +27,16 @@ class UserView extends StatelessWidget {
         ),
       ).applyConstraint(
         width: matchParent,
-        height: 200,
+        height: Size.Giant,
         top: parent.top,
       ),
       Card(
         color: theme.colorScheme.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: BorderShape.S,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: CachedNetworkImage(
-          width: 80,
-          height: 80,
+          width: Size.XXL,
+          height: Size.XXL,
           imageUrl: user.avatar ?? '',
           fit: BoxFit.cover,
         ),
@@ -44,7 +44,7 @@ class UserView extends StatelessWidget {
         id: ConstraintId('card'),
         top: parent.top,
         right: parent.right,
-        margin: const EdgeInsets.only(top: 150, right: 20),
+        margin: const EdgeInsets.only(top: 150, right: EdgeInset.S),
       ),
       Text(
         user.nick ?? user.username ?? '',
@@ -54,7 +54,8 @@ class UserView extends StatelessWidget {
       ).applyConstraint(
         right: ConstraintId('card').left,
         bottom: ConstraintId('card').bottom,
-        margin: const EdgeInsets.only(right: 10, bottom: 40),
+        margin:
+            const EdgeInsets.only(right: EdgeInset.XXS, bottom: EdgeInset.XL),
       ),
     ]);
   }
