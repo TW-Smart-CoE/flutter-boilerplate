@@ -36,8 +36,8 @@ class TweetView extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: CachedNetworkImage(
               imageUrl: tweet.sender?.avatar ?? '',
-              width: Size.L,
-              height: Size.L,
+              width: WidgetSize.L,
+              height: WidgetSize.L,
             ),
           ),
           const SizedBox(width: EdgeInset.S),

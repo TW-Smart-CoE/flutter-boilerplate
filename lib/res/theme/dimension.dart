@@ -1,5 +1,5 @@
-class Size {
-  const Size._();
+class WidgetSize {
+  const WidgetSize._();
 
   static const double XXS = 16;
   static const double XS = 24;

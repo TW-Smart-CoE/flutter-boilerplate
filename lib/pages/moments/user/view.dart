@@ -27,7 +27,7 @@ class UserView extends StatelessWidget {
         ),
       ).applyConstraint(
         width: matchParent,
-        height: Size.Giant,
+        height: WidgetSize.Giant,
         top: parent.top,
       ),
       Card(
@@ -35,8 +35,8 @@ class UserView extends StatelessWidget {
         shape: BorderShape.S,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: CachedNetworkImage(
-          width: Size.XXL,
-          height: Size.XXL,
+          width: WidgetSize.XXL,
+          height: WidgetSize.XXL,
           imageUrl: user.avatar ?? '',
           fit: BoxFit.cover,
         ),
