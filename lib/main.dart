@@ -9,10 +9,10 @@ import 'package:get/get.dart';
 final myApp = GetMaterialApp(
   debugShowCheckedModeBanner: false,
   theme: lightTheme,
-  darkTheme: darkTheme,
+  darkTheme: lightTheme,
   getPages: AppPages.pages,
   initialBinding: GlobalBinding(),
-  initialRoute: Routes.COUNTER,
+  initialRoute: Routes.MOMENTS,
   navigatorObservers: [GetXRouterObserver()],
   locale: StringResources.locale,
   fallbackLocale: StringResources.fallbackLocale,

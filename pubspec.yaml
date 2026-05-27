@@ -1,5 +1,5 @@
 name: first_demo
-description: A new Flutter project.
+description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <3.10.0'
+  sdk: '>=3.4.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,19 +31,19 @@ dependencies:
   flutter:
     sdk: flutter
   get:
-  dio: ^5.1.2
-  retrofit: '>=4.0.0 <5.0.0'
-  json_annotation: ^4.8.1
-  logger: ^1.3.0
-  pretty_dio_logger: ^1.3.1
+  dio: ^5.9.0
+  retrofit: ^4.9.0
+  json_annotation: ^4.9.0
+  logger: ^2.6.0
+  pretty_dio_logger: ^1.4.0
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_constraintlayout: ^1.6.3-stable
-  cached_network_image: ^3.2.3
-  flutter_dotenv: ^5.0.2
+  cupertino_icons: ^1.0.6
+  flutter_constraintlayout: ^1.7.0-stable
+  cached_network_image: ^3.4.1
+  flutter_dotenv: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -54,11 +54,11 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  retrofit_generator: '>=5.0.0 <6.0.0'
-  build_runner: '>=2.3.0 <4.0.0'
-  json_serializable: ^6.6.2
-  mockito: ^5.4.0
+  flutter_lints: ^3.0.0
+  retrofit_generator: ^10.0.1
+  build_runner: '>=2.6.0 <4.0.0'
+  json_serializable: ^6.10.0
+  mockito: ^5.7.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
