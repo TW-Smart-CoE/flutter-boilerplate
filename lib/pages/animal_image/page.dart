@@ -17,8 +17,10 @@ class AnimalImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      title: stringRes(R.animal_image_page_title),
+      context: context,
+      title: l10n(context).animalImagePageTitle,
       body: AsyncLoadProcessor(
+        context,
         Get.put(AutoLoadController(_controller)),
         content: (data) => _animalImageContent(_controller),
       ),

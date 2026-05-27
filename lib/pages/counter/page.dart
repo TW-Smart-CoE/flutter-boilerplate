@@ -14,7 +14,8 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(context) {
     return BaseScaffold(
-      title: stringRes(R.counter_page_title),
+      context: context,
+      title: l10n(context).counterPageTitle,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -35,7 +36,7 @@ class CounterPage extends StatelessWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(stringRes(R.counter_main_tip)),
+            Text(l10n(context).counterMainTip),
             Obx(() => Text(
                   '${_controller.count}',
                   style: Theme.of(context).textTheme.headlineMedium,

@@ -19,7 +19,7 @@ class AsyncLoadController<T> extends GetxController {
       _dataController.data = data;
       loadState.value = Success<T>(data);
     } catch (e) {
-      logger.e('[AsyncLoadViewModel] there is an error in fetcher', e);
+      logger.e('[AsyncLoadViewModel] there is an error in fetcher', error: e);
       loadState.value = Failure<T>(_data, e);
     }
   }

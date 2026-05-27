@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appName": "Flutter Demo",
+  "counterPageTitle": "Counter",
+  "counterMainTip": "You have pushed the button this many times:",
+  "animalImagePageTitle": "Animal Image",
+  "loading": "Loading...",
+  "devMenu": "Dev Menu",
+  "connectionErrorTitle": "Connection Error",
+  "connectionErrorSubtitle": "Please check your network connection.",
+  "loadingOrParsingErrorTitle": "Loading or Parsing Error",
+  "loadingOrParsingErrorSubtitle": "Oops, something went wrong.",
+  "retry": "Retry",
+  "momentsPageTitle": "Moments"
+}

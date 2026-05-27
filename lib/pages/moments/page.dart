@@ -18,8 +18,10 @@ class MomentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      title: stringRes(R.moments_page_title),
+      context: context,
+      title: l10n(context).momentsPageTitle,
       body: AsyncLoadProcessor(
+        context,
         Get.put(AutoLoadController(_controller)),
         content: (data) => NestedScrollView(
           headerSliverBuilder: (_, __) => [

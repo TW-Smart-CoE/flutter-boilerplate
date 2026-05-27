@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
   get:
   dio: ^5.9.0
   retrofit: ^4.9.0
@@ -67,6 +70,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

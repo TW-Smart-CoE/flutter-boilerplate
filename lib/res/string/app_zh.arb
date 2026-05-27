@@ -1,0 +1,15 @@
+{
+  "@@locale": "zh",
+  "appName": "Flutter 示例",
+  "counterPageTitle": "计数器",
+  "counterMainTip": "你已经点击了这个按钮(次数)：",
+  "animalImagePageTitle": "动物图片",
+  "loading": "加载中...",
+  "devMenu": "开发菜单",
+  "connectionErrorTitle": "连接错误",
+  "connectionErrorSubtitle": "请检查你的网络连接。",
+  "loadingOrParsingErrorTitle": "加载或解析错误",
+  "loadingOrParsingErrorSubtitle": "哎呀，出了点问题。",
+  "retry": "重试",
+  "momentsPageTitle": "朋友圈"
+}
