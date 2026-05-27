@@ -1,14 +1,14 @@
+import 'package:first_demo/common/di/service_locator.dart';
 import 'package:first_demo/common/network/moments/api.dart';
 import 'package:first_demo/common/network/moments/model/tweet.dart';
 import 'package:first_demo/pages/moments/tweet/store.dart';
-import 'package:get/get.dart';
 
 class TweetRepository {
   final MomentsApi _momentsApi;
   final _tweetStore = TweetStore();
 
   TweetRepository({MomentsApi? momentsApi})
-      : _momentsApi = momentsApi ?? Get.find();
+      : _momentsApi = momentsApi ?? getIt<MomentsApi>();
 
   Future<List<Tweet>> getTweets(int startIndex, int count) async {
     final List<Tweet> tweetList;

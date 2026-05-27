@@ -1,15 +1,15 @@
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class DevMenu extends StatelessWidget {
   DevMenu({Key? key}) : super(key: key);
 
   final _items = {
-    R.counter_page_title: () => Get.toNamed(Routes.COUNTER),
-    R.animal_image_page_title: () => Get.toNamed(Routes.ANIMAL_IMAGE),
-    R.moments_page_title: () => Get.toNamed(Routes.MOMENTS),
+    R.counter_page_title: Routes.COUNTER,
+    R.animal_image_page_title: Routes.ANIMAL_IMAGE,
+    R.moments_page_title: Routes.MOMENTS,
   };
 
   @override
@@ -41,7 +41,7 @@ class DevMenu extends StatelessWidget {
                         style: ListTileStyle.drawer,
                         trailing: const Icon(Icons.arrow_right),
                         title: Text(stringRes(entry.key)),
-                        onTap: entry.value,
+                        onTap: () => context.go(entry.value),
                       ))
                   .toList(),
             ).toList(),

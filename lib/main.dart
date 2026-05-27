@@ -1,26 +1,26 @@
-import 'package:first_demo/common/di/global_binding.dart';
+import 'package:first_demo/common/di/service_locator.dart';
 import 'package:first_demo/common/utils/environment_config.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/res/theme/theme.dart';
 import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-final myApp = GetMaterialApp(
+final myApp = MaterialApp.router(
   debugShowCheckedModeBanner: false,
   theme: lightTheme,
   darkTheme: lightTheme,
-  getPages: AppPages.pages,
-  initialBinding: GlobalBinding(),
-  initialRoute: Routes.MOMENTS,
-  navigatorObservers: [GetXRouterObserver()],
+  routerConfig: appRouter,
   locale: StringResources.locale,
-  fallbackLocale: StringResources.fallbackLocale,
-  translations: StringResources(),
+  localizationsDelegates: const [],
+  supportedLocales: const [Locale('en', 'US')],
 );
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await loadEnvironmentConfig();
+
+  // Initialize global dependencies
+  setupServiceLocator();
 
   runApp(myApp);
 }
