@@ -14,7 +14,7 @@ final GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(
       path: Routes.COUNTER,
-      builder: (context, state) => CounterPage(),
+      builder: (context, state) => const CounterPage(),
     ),
     GoRoute(
       path: Routes.ANIMAL_IMAGE,

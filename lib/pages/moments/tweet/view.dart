@@ -2,73 +2,69 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/common/network/moments/model/comment.dart';
 import 'package:first_demo/common/network/moments/model/image.dart' as model;
 import 'package:first_demo/common/network/moments/model/tweet.dart';
-import 'package:first_demo/pages/moments/tweet/controller.dart';
 import 'package:first_demo/res/theme/color.dart';
 import 'package:first_demo/res/theme/dimension.dart';
 import 'package:first_demo/res/theme/shape.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TweetView extends StatelessWidget {
-  final TweetController _controller;
+  final List<Tweet> _tweets;
 
-  const TweetView(TweetController tweetController, {Key? key})
-      : _controller = tweetController,
-        super(key: key);
+  const TweetView({required List<Tweet> tweets, super.key}) : _tweets = tweets;
 
   @override
   Widget build(BuildContext context) {
-    final tweets = _controller.data;
-
     return ListView.separated(
-      itemCount: tweets.length,
-      itemBuilder: (_, index) => _tweetItem(tweets[index]),
+      itemCount: _tweets.length,
+      itemBuilder: (_, index) => _tweetItem(context, _tweets[index]),
       separatorBuilder: (_, __) => const Divider(height: BorderWidth.Light),
     );
   }
 
-  Widget _tweetItem(Tweet tweet) => Container(
-        margin: const EdgeInsets.symmetric(
-            horizontal: EdgeInset.S, vertical: EdgeInset.XS),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Card(
-            shape: BorderShape.XS,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: CachedNetworkImage(
-              imageUrl: tweet.sender?.avatar ?? '',
-              width: WidgetSize.L,
-              height: WidgetSize.L,
-            ),
+  Widget _tweetItem(BuildContext context, Tweet tweet) {
+    final theme = Theme.of(context);
+    return Container(
+      margin: const EdgeInsets.symmetric(
+          horizontal: EdgeInset.S, vertical: EdgeInset.XS),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Card(
+          shape: BorderShape.XS,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: CachedNetworkImage(
+            imageUrl: tweet.sender?.avatar ?? '',
+            width: WidgetSize.L,
+            height: WidgetSize.L,
           ),
-          const SizedBox(width: EdgeInset.S),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+        ),
+        const SizedBox(width: EdgeInset.S),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tweet.sender?.nick ?? tweet.sender?.username ?? '',
+                style: theme.textTheme.titleLarge?.copyWith(
+                    color: momentsUserNameColor, fontWeight: FontWeight.normal),
+              ),
+              if (tweet.content != null && tweet.content!.isNotEmpty) ...[
                 Text(
-                  tweet.sender?.nick ?? tweet.sender?.username ?? '',
-                  style: _theme.textTheme.titleLarge?.copyWith(
-                      color: momentsUserNameColor,
-                      fontWeight: FontWeight.normal),
-                ),
-                if (tweet.content != null && tweet.content!.isNotEmpty) ...[
-                  Text(
-                    tweet.content!,
-                    style: _theme.textTheme.titleSmall
-                        ?.copyWith(fontWeight: FontWeight.normal),
-                  )
-                ],
-                if (tweet.images != null && tweet.images!.isNotEmpty) ...[
-                  _imageGrid(tweet.images!)
-                ],
-                if (tweet.comments != null && tweet.comments!.isNotEmpty) ...[
-                  _comments(tweet.comments!)
-                ],
+                  tweet.content!,
+                  style: theme.textTheme.titleSmall
+                      ?.copyWith(fontWeight: FontWeight.normal),
+                )
               ],
-            ),
+              if (tweet.images != null && tweet.images!.isNotEmpty) ...[
+                _imageGrid(tweet.images!)
+              ],
+              if (tweet.comments != null && tweet.comments!.isNotEmpty) ...[
+                _comments(context, tweet.comments!)
+              ],
+            ],
           ),
-        ]),
-      );
+        ),
+      ]),
+    );
+  }
 
   Widget _imageGrid(List<model.Image> images) {
     final cnt = images.length;
@@ -110,7 +106,7 @@ class TweetView extends StatelessWidget {
     );
   }
 
-  Widget _comments(List<Comment> comments) => Container(
+  Widget _comments(BuildContext context, List<Comment> comments) => Container(
         width: double.infinity,
         decoration: ShapeDecoration(
           color: AppColorPalette.neutral.light60,
@@ -123,13 +119,14 @@ class TweetView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: comments
               .where((it) => it.content.isNotEmpty)
-              .map((comment) => _commentItem(comment))
+              .map((comment) => _commentItem(context, comment))
               .toList(),
         ),
       );
 
-  Widget _commentItem(Comment comment) => Text.rich(TextSpan(
-        style: _theme.textTheme.titleSmall?.copyWith(height: 1.5),
+  Widget _commentItem(BuildContext context, Comment comment) =>
+      Text.rich(TextSpan(
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(height: 1.5),
         children: [
           TextSpan(
             text: comment.sender.nick ?? comment.sender.username ?? '',
@@ -142,6 +139,4 @@ class TweetView extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.normal)),
         ],
       ));
-
-  ThemeData get _theme => Get.theme;
 }

@@ -1,35 +1,42 @@
-import 'package:first_demo/common/async_loader/async_load_processor.dart';
-import 'package:first_demo/common/async_loader/auto_load_controller.dart';
+import 'package:first_demo/common/async_loader/async_loader.dart';
 import 'package:first_demo/common/scaffold/base_scaffold.dart';
-import 'package:first_demo/pages/moments/controller.dart';
+import 'package:first_demo/pages/moments/repository.dart';
 import 'package:first_demo/pages/moments/tweet/view.dart';
 import 'package:first_demo/pages/moments/user/view.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fquery/fquery.dart';
 
-class MomentsPage extends StatelessWidget {
-  final MomentsController _controller;
+class MomentsPage extends HookWidget {
+  final MomentsRepository _repository;
 
-  MomentsPage({MomentsController? momentsController, Key? key})
-      : _controller = momentsController ?? Get.put(MomentsController()),
-        super(key: key);
+  MomentsPage({
+    super.key,
+    MomentsRepository? repository,
+  }) : _repository = repository ?? MomentsRepository();
 
   @override
   Widget build(BuildContext context) {
+    final momentsQuery = useQuery(
+      ['moments'],
+      _repository.getMoments,
+      context: context,
+    );
+
     return BaseScaffold(
       context: context,
       title: l10n(context).momentsPageTitle,
-      body: AsyncLoadProcessor(
-        context,
-        Get.put(AutoLoadController(_controller)),
-        content: (data) => NestedScrollView(
+      body: AsyncLoader<MomentsData>(
+        context: context,
+        query: momentsQuery,
+        builder: (data) => NestedScrollView(
           headerSliverBuilder: (_, __) => [
             SliverToBoxAdapter(
-              child: UserView(_controller.userController),
+              child: UserView(user: data.user),
             ),
           ],
-          body: TweetView(_controller.tweetController),
+          body: TweetView(tweets: data.tweets),
         ),
       ),
     );

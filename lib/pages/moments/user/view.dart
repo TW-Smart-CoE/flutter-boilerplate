@@ -1,22 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_demo/pages/moments/user/controller.dart';
+import 'package:first_demo/common/network/moments/model/user.dart';
 import 'package:first_demo/res/theme/dimension.dart';
 import 'package:first_demo/res/theme/shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_constraintlayout/flutter_constraintlayout.dart';
-import 'package:get/get.dart';
 
 class UserView extends StatelessWidget {
-  final UserController _controller;
+  final User _user;
 
-  const UserView(UserController userController, {Key? key})
-      : _controller = userController,
-        super(key: key);
+  const UserView({required User user, super.key}) : _user = user;
 
   @override
   Widget build(BuildContext context) {
-    final user = _controller.data;
-    final theme = Get.theme;
+    final user = _user;
+    final theme = Theme.of(context);
 
     return ConstraintLayout(children: [
       Container(

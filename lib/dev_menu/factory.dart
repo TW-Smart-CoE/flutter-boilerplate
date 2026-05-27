@@ -3,5 +3,5 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 StatelessWidget? createDevMenu() {
-  return kDebugMode ? DevMenu() : null;
+  return kDebugMode ? const DevMenu() : null;
 }

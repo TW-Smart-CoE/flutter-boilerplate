@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DevMenu extends StatelessWidget {
-  DevMenu({Key? key}) : super(key: key);
+  const DevMenu({super.key});
 
   static Map<String Function(AppLocalizations), String> _buildItems() => {
         (AppLocalizations l) => l.counterPageTitle: Routes.COUNTER,
@@ -40,7 +40,7 @@ class DevMenu extends StatelessWidget {
                     onTap: () => context.go(entry.value),
                   ))
               .toList(),
-        ).toList(),
+        ),
       ]),
     );
   }

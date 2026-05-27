@@ -1,18 +1,16 @@
 import 'package:first_demo/common/scaffold/base_scaffold.dart';
-import 'package:first_demo/pages/counter/controller.dart';
+import 'package:first_demo/pages/counter/use_counter.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CounterPage extends StatelessWidget {
-  final CounterController _controller;
-
-  CounterPage({Key? key, CounterController? counterController})
-      : _controller = counterController ?? Get.put(CounterController()),
-        super(key: key);
+class CounterPage extends HookWidget {
+  const CounterPage({super.key});
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
+    final (:num, :incrementCounter) = useCounter();
+
     return BaseScaffold(
       context: context,
       title: l10n(context).counterPageTitle,
@@ -37,15 +35,15 @@ class CounterPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(l10n(context).counterMainTip),
-            Obx(() => Text(
-                  '${_controller.count}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                )),
+            Text(
+              '${num.value}',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _controller.increment,
+        onPressed: incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
