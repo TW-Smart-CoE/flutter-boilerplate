@@ -24,7 +24,6 @@ final myApp = CacheProvider(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvironmentConfig();
-  // Initialize global dependencies
   setupDependencyInjection();
 
   runApp(myApp);

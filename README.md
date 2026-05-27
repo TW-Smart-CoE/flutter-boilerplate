@@ -1,9 +1,18 @@
 # Flutter Boilerplate
 
-一个基于[GetX](https://pub.dev/packages/get)构建的[Flutter](https://flutter.dev/) 项目模板，包含了移动端工程化的一些常用能力，可以直接拿来使用。
-> 注：GetX不仅仅是一个状态管理库，它还包含了路由、依赖注入等功能，可以说是一个全能型的库。
-但本项目原则上只依赖于它的状态管理功能，其他能力如页面路由、依赖注入等并不是必须的，可以根据自己的喜好选择其他库。
-这是一段正文。
+一个 Flutter 项目模板，包含了移动端工程化的一些常用能力，可以直接拿来使用。
+
+## 技术栈
+
+| 能力 | 方案 |
+|------|------|
+| 路由 | [go_router](https://pub.dev/packages/go_router) |
+| 依赖注入 | [get_it](https://pub.dev/packages/get_it) |
+| 状态管理 | [flutter_hooks](https://pub.dev/packages/flutter_hooks) |
+| 异步数据加载 | [fquery](https://pub.dev/packages/fquery)（类 React Query） |
+| 国际化 | Flutter 原生 gen-l10n（ARB） |
+| 网络请求 | [Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) + [json_serializable](https://pub.dev/packages/json_serializable) |
+| 测试 | flutter_test + [mockito](https://pub.dev/packages/mockito) + [flutter_hooks_test](https://pub.dev/packages/flutter_hooks_test) |
 
 ## 1. 核心部分
 
@@ -12,81 +21,118 @@
 ``` yaml
 lib # Flutter代码根目录
 ├── common # 一些跨页面共享的代码
-│   ├── di      # 依赖注入，主要是一些全局单例对象
+│   ├── async_loader # 异步加载组件
+│   │   ├── async_loader.dart    # 基于 fquery QueryResult 的通用加载状态 Builder
+│   │   ├── error_placeholder.dart   # 错误占位 Widget
+│   │   └── loading_placeholder.dart # 加载占位 Widget
 │   ├── network # 网络请求相关
-|   |   ├── animal  # 以业务为单位组织API接口代码
-|   |   |   ├── model     # 用于放置同目录下的API接口所用到的数据模型
-|   |   |   |   └── animal.dart  # 动物图片相关的数据模型定义
-|   |   |   └── api.dart  # 动物图片相关的API接口定义
-|   |   └── dio_client.dart # 网络请求客户端
-│   └── utils   # 工具类
+│   │   ├── animal  # 以业务为单位组织API接口代码
+│   │   │   ├── model     # API接口所用到的数据模型
+│   │   │   │   └── animal.dart
+│   │   │   └── api.dart  # 动物图片相关的API接口定义
+│   │   ├── moments # 朋友圈相关API
+│   │   │   ├── model
+│   │   │   └── api.dart
+│   │   └── dio_client.dart # 网络请求客户端
+│   ├── scaffold  # 通用页面脚手架
+│   └── utils     # 工具类
+│       ├── di.dart              # 依赖注入配置（get_it）
+│       ├── environment_config.dart # 环境配置
+│       └── logger.dart          # 日志工具
 ├── pages # 以页面为单位组织所有相关业务逻辑代码
+│   ├── counter # 计数器页面
+│   │   ├── page.dart(CounterPage)         # HookWidget，渲染UI
+│   │   └── use_counter.dart(useCounter)   # 自定义 Hook，管理计数状态
 │   ├── animal_image # 展示动物图片的页面
-│   │   ├── page.dart(AnimalImagePage)              # 根据状态渲染UI
-│   │   ├── controller.dart(AnimalImageController)  # 状态 + 状态相关的逻辑
-│   │   └── repository.dart(AnimalImageRepository)  # 数据相关的逻辑
+│   │   ├── page.dart(AnimalImagePage)              # HookWidget + useQuery
+│   │   └── repository.dart(AnimalImageRepository)  # 数据获取逻辑
+│   └── moments # 朋友圈页面
+│       ├── page.dart(MomentsPage)              # HookWidget + useQuery
+│       ├── repository.dart(MomentsRepository)  # 组合 UserRepo + TweetRepo
+│       ├── user/
+│       │   ├── repository.dart # 用户数据获取
+│       │   └── view.dart       # 用户信息 UI
+│       └── tweet/
+│           ├── repository.dart # 推文数据获取
+│           ├── store.dart      # 推文缓存
+│           └── view.dart       # 推文列表 UI
 ├── res # 资源相关
-|   ├── string  # 字符串资源
-|   |   ├── strings.dart  # 字符串资源的入口文件，包括字符串的key定义和字符串资源的获取方法
-|   |   └── en_US.dart    # 英文字符串资源
-|   ├── theme   # 主题相关
-|   |   ├── color.dart      # 调色盘与主题色，App中用到的颜色尽量从这里取
-|   |   ├── dimension.dart  # 尺寸相关，包括控件大小、间距等
-|   |   ├── shape.dart      # 形状相关
-|   |   ├── typography.dart # 字体相关
-|   |   └── theme.dart      # Material主题配置
-├── main.dart   # 入口文件，必要时可以把MyApp抽离出来
-└── routes.dart # 路由配置
+│   ├── string  # 国际化字符串（gen-l10n）
+│   │   ├── app_en.arb      # 英文 ARB 源文件
+│   │   ├── app_zh.arb      # 中文 ARB 源文件
+│   │   ├── strings.dart    # l10n(context) 辅助方法
+│   │   └── generated/      # 自动生成的本地化代码
+│   └── theme   # 主题相关
+│       ├── color.dart      # 调色盘与主题色
+│       ├── dimension.dart  # 尺寸相关
+│       ├── shape.dart      # 形状相关
+│       ├── typography.dart # 字体相关
+│       └── theme.dart      # Material主题配置
+├── dev_menu  # 开发菜单（仅 debug 模式）
+├── main.dart   # 入口文件
+└── routes.dart # 路由配置（go_router）
 ```
 
 ### 1.2 架构
 
-本项目选用的是MVVM架构，对于一个页面来说，主要包含以下几个部分：
+本项目采用 **Hook + Repository** 架构模式：
 
-|    | View            | ViewModel       | Model                         |
-|----|-----------------|-----------------|-------------------------------|
-| 代码 | page.dart       | controller.dart | repository.dart(api, model...) |
-| 职责 | 用于渲染UI          | 用于管理状态和状态相关的逻辑  | 用于数据相关的逻辑 |
-| 构成 | UI内部状态 + Widget | 业务状态 + UI事件响应   | 数据存取、缓存策略... |
+| 层次 | 文件 | 职责 |
+|------|------|------|
+| **View** | `page.dart` | HookWidget，声明式渲染 UI |
+| **State** | 自定义 Hook / `useQuery` | 管理 UI 状态和异步数据加载 |
+| **Data** | `repository.dart` | 数据获取、缓存策略、业务转换 |
+| **API** | `api.dart` | 网络接口定义（retrofit） |
+
+对于简单状态（如 Counter），使用自定义 Hook（`useState`）即可；
+对于异步数据加载（如 AnimalImage、Moments），使用 `useQuery` + `Repository` + `AsyncLoader` 组合。
 
 ### 1.3 页面路由
 
-目前选用的是GetX的路由能力，但是也可以使用其他的路由库，比如[fluro](https://pub.dev/packages/fluro)、[auto_route](https://pub.dev/packages/auto_route)等。
-> TODO: 此处应该对页面路由做个封装，以便于在不同的路由库之间切换。
+使用 [go_router](https://pub.dev/packages/go_router) 管理路由，配置在 `routes.dart` 中。
+go_router 是 Flutter 官方推荐的声明式路由方案，支持深度链接、重定向、路由守卫等。
 
 ### 1.4 依赖注入
 
-GetX中有一个机制：在page中如果是通过GetX的依赖注入方法获取到的controller，那么在页面销毁时，会自动调用controller的dispose方法。
-因此目前选用的是GetX的依赖注入能力，但是这并不是必须的，controller一般只被page持有，所以在page销毁时，controller也会被销毁，不会造成内存泄漏。
-因此也可以使用其他的依赖注入库，比如[get_it](https://pub.dev/packages/get_it)、[kiwi](https://pub.dev/packages/kiwi)等。
-值得一提的是，Flutter中的依赖注入库相对于Android来说比较简单，没有像Hilt那样的复杂的依赖注入场景，所以选用哪个依赖注入库并不是很重要。
-一般只是用来获取一些全局单例对象，比如网络请求客户端、数据库客户端等。
+使用 [get_it](https://pub.dev/packages/get_it) 作为 Service Locator，配置在 `lib/common/utils/di.dart` 中。
+仅注册全局基础设施层对象（DioClient、Api），Repository 层按需实例化，不注册到 DI 容器。
 
-### 1.5 网络库
+### 1.5 状态管理
 
-目前选用的是[Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) +
-[json_serializable](https://pub.dev/packages/json_serializable)的组合，这也是目前Flutter中比较流行的网络库组合。
-Dio类似于Android中的OkHttp，retrofit类似于Android中的Retrofit，json_serializable类似于Android中的Gson。
+使用 [flutter_hooks](https://pub.dev/packages/flutter_hooks)：
+- `useState` — 简单的局部状态
+- `useQuery`（来自 [fquery](https://pub.dev/packages/fquery)）— 异步数据获取、缓存、重试
 
-### 1.6 持久化
+### 1.6 网络库
 
-> TODO: 预计选用[hive](https://pub.dev/packages/hive)
+使用 [Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) +
+[json_serializable](https://pub.dev/packages/json_serializable) 组合。
+Dio 类似于 Android 中的 OkHttp，retrofit 类似于 Android 中的 Retrofit，json_serializable 类似于 Gson。
 
-### 1.7 对页面异步加载的一个封装
+### 1.7 异步加载组件
 
-这部分代码在`lib/common/async_loader`中，其目标是让页面不必处理异步加载的逻辑，只需要关注数据成功加载后的UI渲染即可。
-`AsyncLoadProcessor`负责异步加载的UI渲染，它会根据`LoadState`的状态来显示不同的UI，`LoadState`的状态有以下几种：
-1. `Idle`：表示未开始加载的空状态，此时不会显示任何内容
-2. `Loading`：表示正在加载中，此时默认会显示`LoadingPlaceholder`，若`loadingView`不为空，则会显示`loadingView`
-3. `Success`：表示加载成功，此时会显示`content`中传入的Widget，一般此处传入的Widget才是页面真正的主体内容
-4. `Failure`：表示加载失败，此时默认则会显示`ErrorPlaceholder`，若`errorView`不为空，则会显示`errorView`
+`lib/common/async_loader/async_loader.dart` 提供了 `AsyncLoader<T>` 组件，
+基于 fquery 的 `QueryResult` 自动处理 Loading / Error / Success 三种状态的 UI 切换：
 
-`AsyncLoadController`是`AsyncLoadProcessor`的controller，它负责处理异步加载的逻辑。它的构造函数中需要传入一个`DataController`，
-`AsyncLoadController`并且会调用`DataController`的`fetch`方法来获取数据，并且会根据`fetch`的执行结果来更新`LoadState`的状态。
+```dart
+AsyncLoader<List<Animal>>(
+  context: context,
+  query: animalsQuery,  // 来自 useQuery
+  builder: (animals) => /* 成功时的 UI */,
+)
+```
 
-`DataController`是一个抽象类，它的子类需要实现`fetch`方法，`fetch`方法需要返回一个`Future`。
-`DataController`是页面真正主体（即上面提到的`content`）对应的controller，它虽然要实现`fetch`方法，但它不负责获取数据，
-它只用关心数据成功加载后的业务逻辑。
+### 1.8 国际化
+
+使用 Flutter 原生的 `gen-l10n` 方案：
+- ARB 文件位于 `lib/res/string/`（`app_en.arb`、`app_zh.arb`）
+- 生成代码位于 `lib/res/string/generated/`
+- 使用方式：`l10n(context).yourStringKey`
+- 添加新字符串后运行 `flutter gen-l10n`
+
+### 1.9 持久化
+
+> TODO: 预计选用 [hive](https://pub.dev/packages/hive)
 
 ## 2. 非核心部分
 
@@ -94,18 +140,20 @@ Dio类似于Android中的OkHttp，retrofit类似于Android中的Retrofit，json_
 
 ### 2.2 单元测试
 
+- **Hook 测试**：使用 [flutter_hooks_test](https://pub.dev/packages/flutter_hooks_test) 的 `buildHook()` + `act()`
+- **Repository 测试**：使用 mockito mock Api 层
+- **Widget 测试**：使用 `flutter_test` + mock repository + `CacheProvider`
+
 ### 2.3 Theme
 
-### 2.4 国际化
+### 2.4 Dev Menu
 
-### 2.5 Dev Menu
+### 2.5 环境变量
 
-### 2.6 环境变量
+### 2.6 Feature Toggle
 
-### 2.7 Feature Toggle
+### 2.7 混淆
 
-### 2.8 混淆
+### 2.8 pipeline
 
-### 2.9 pipeline
-
-### 2.10 local server
+### 2.9 local server
