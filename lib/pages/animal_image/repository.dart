@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:first_demo/common/di/service_locator.dart';
 import 'package:first_demo/common/network/animal/api.dart';
 import 'package:first_demo/common/network/animal/model/animal.dart';
+import 'package:first_demo/common/utils/di.dart';
 
 class AnimalImageRepository {
   final AnimalApi _animalApi;

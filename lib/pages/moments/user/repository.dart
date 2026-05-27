@@ -1,6 +1,6 @@
-import 'package:first_demo/common/di/service_locator.dart';
 import 'package:first_demo/common/network/moments/api.dart';
 import 'package:first_demo/common/network/moments/model/user.dart';
+import 'package:first_demo/common/utils/di.dart';
 
 class UserRepository {
   final MomentsApi _momentsApi;

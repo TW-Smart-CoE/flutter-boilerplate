@@ -1,4 +1,4 @@
-import 'package:first_demo/common/di/service_locator.dart';
+import 'package:first_demo/common/utils/di.dart';
 import 'package:first_demo/common/utils/environment_config.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/theme/theme.dart';
@@ -25,7 +25,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvironmentConfig();
   // Initialize global dependencies
-  setupServiceLocator();
+  setupDependencyInjection();
 
   runApp(myApp);
 }
