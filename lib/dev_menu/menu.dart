@@ -16,7 +16,7 @@ class DevMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final loc = l10n(context);
+    final string = l10n(context);
     final items = _buildItems();
     return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: [
@@ -24,7 +24,7 @@ class DevMenu extends StatelessWidget {
           decoration: BoxDecoration(color: theme.colorScheme.primary),
           child: Center(
               child: Text(
-            loc.devMenu,
+            string.devMenu,
             style: theme.textTheme.titleLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
             ),
@@ -36,7 +36,7 @@ class DevMenu extends StatelessWidget {
               .map((entry) => ListTile(
                     style: ListTileStyle.drawer,
                     trailing: const Icon(Icons.arrow_right),
-                    title: Text(entry.key(loc)),
+                    title: Text(entry.key(string)),
                     onTap: () => context.go(entry.value),
                   ))
               .toList(),

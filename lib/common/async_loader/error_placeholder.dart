@@ -44,7 +44,7 @@ Widget ErrorPlaceholder({
   required VoidCallback onRetry,
 }) {
   final theme = Theme.of(context);
-  final loc = l10n(context);
+  final string = l10n(context);
   return Container(
     width: double.infinity,
     height: double.infinity,
@@ -61,7 +61,7 @@ Widget ErrorPlaceholder({
         ),
         const SizedBox(height: 16),
         Text(
-          errorType.title(loc),
+          errorType.title(string),
           style: theme.textTheme.titleMedium?.copyWith(
             color: theme.colorScheme.onSurface,
           ),
@@ -69,7 +69,7 @@ Widget ErrorPlaceholder({
         ),
         const SizedBox(height: 8),
         Text(
-          errorType.subTitle(loc),
+          errorType.subTitle(string),
           style: theme.textTheme.labelMedium?.copyWith(
             color: theme.colorScheme.onSurface,
           ),
@@ -77,7 +77,7 @@ Widget ErrorPlaceholder({
         const SizedBox(height: 16),
         FilledButton(
           onPressed: onRetry,
-          child: Text(loc.retry),
+          child: Text(string.retry),
         ),
       ],
     ),
