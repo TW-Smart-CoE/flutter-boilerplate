@@ -1,3 +1,5 @@
+import 'package:first_demo/common/utils/di.dart';
+import 'package:first_demo/common/utils/token_store.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/routes.dart';
@@ -40,6 +42,20 @@ class DevMenu extends StatelessWidget {
                     onTap: () => context.go(entry.value),
                   ))
               .toList(),
+        ),
+        const Divider(),
+        ListTile(
+          leading: Icon(Icons.logout, color: theme.colorScheme.error),
+          title: Text(
+            'Logout (Clear Token)',
+            style: TextStyle(color: theme.colorScheme.error),
+          ),
+          onTap: () async {
+            await getIt<TokenStore>().clearToken();
+            if (context.mounted) {
+              context.go(Routes.LOGIN);
+            }
+          },
         ),
       ]),
     );

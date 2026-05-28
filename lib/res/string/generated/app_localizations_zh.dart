@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -44,4 +43,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get momentsPageTitle => '朋友圈';
+
+  @override
+  String get loginPageTitle => '登录';
+
+  @override
+  String get loginUsername => '用户名';
+
+  @override
+  String get loginPassword => '密码';
+
+  @override
+  String get loginButton => '登录';
+
+  @override
+  String get loginEmptyFieldsError => '请输入用户名和密码。';
+
+  @override
+  String get loginFailedError => '登录失败，请重试。';
 }

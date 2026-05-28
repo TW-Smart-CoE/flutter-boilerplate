@@ -11,5 +11,11 @@
   "loadingOrParsingErrorTitle": "Loading or Parsing Error",
   "loadingOrParsingErrorSubtitle": "Oops, something went wrong.",
   "retry": "Retry",
-  "momentsPageTitle": "Moments"
+  "momentsPageTitle": "Moments",
+  "loginPageTitle": "Login",
+  "loginUsername": "Username",
+  "loginPassword": "Password",
+  "loginButton": "Sign In",
+  "loginEmptyFieldsError": "Please enter username and password.",
+  "loginFailedError": "Login failed. Please try again."
 }

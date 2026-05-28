@@ -11,5 +11,11 @@
   "loadingOrParsingErrorTitle": "加载或解析错误",
   "loadingOrParsingErrorSubtitle": "哎呀，出了点问题。",
   "retry": "重试",
-  "momentsPageTitle": "朋友圈"
+  "momentsPageTitle": "朋友圈",
+  "loginPageTitle": "登录",
+  "loginUsername": "用户名",
+  "loginPassword": "密码",
+  "loginButton": "登录",
+  "loginEmptyFieldsError": "请输入用户名和密码。",
+  "loginFailedError": "登录失败，请重试。"
 }

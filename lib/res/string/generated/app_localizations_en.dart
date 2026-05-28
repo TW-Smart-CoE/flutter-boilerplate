@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -44,4 +43,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get momentsPageTitle => 'Moments';
+
+  @override
+  String get loginPageTitle => 'Login';
+
+  @override
+  String get loginUsername => 'Username';
+
+  @override
+  String get loginPassword => 'Password';
+
+  @override
+  String get loginButton => 'Sign In';
+
+  @override
+  String get loginEmptyFieldsError => 'Please enter username and password.';
+
+  @override
+  String get loginFailedError => 'Login failed. Please try again.';
 }

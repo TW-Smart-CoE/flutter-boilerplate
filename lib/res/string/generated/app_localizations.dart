@@ -169,6 +169,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Moments'**
   String get momentsPageTitle;
+
+  /// No description provided for @loginPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginPageTitle;
+
+  /// No description provided for @loginUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get loginUsername;
+
+  /// No description provided for @loginPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get loginPassword;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get loginButton;
+
+  /// No description provided for @loginEmptyFieldsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter username and password.'**
+  String get loginEmptyFieldsError;
+
+  /// No description provided for @loginFailedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed. Please try again.'**
+  String get loginFailedError;
 }
 
 class _AppLocalizationsDelegate
