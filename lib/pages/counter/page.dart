@@ -11,9 +11,10 @@ class CounterPage extends HookWidget {
   Widget build(BuildContext context) {
     final (:num, :incrementCounter) = useCounter();
 
+    final strings = stringsOf(context);
     return BaseScaffold(
       context: context,
-      title: l10n(context).counterPageTitle,
+      title: strings.counterPageTitle,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -34,7 +35,7 @@ class CounterPage extends HookWidget {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(l10n(context).counterMainTip),
+            Text(strings.counterMainTip),
             Text(
               '${num.value}',
               style: Theme.of(context).textTheme.headlineMedium,

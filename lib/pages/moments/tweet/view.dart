@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_demo/common/network/moments/model/comment.dart';
-import 'package:first_demo/common/network/moments/model/image.dart' as model;
-import 'package:first_demo/common/network/moments/model/tweet.dart';
+import 'package:first_demo/pages/moments/tweet/model/comment.dart';
+import 'package:first_demo/pages/moments/tweet/model/image.dart' as model;
+import 'package:first_demo/pages/moments/tweet/model/tweet.dart';
 import 'package:first_demo/res/theme/color.dart';
 import 'package:first_demo/res/theme/dimension.dart';
 import 'package:first_demo/res/theme/shape.dart';

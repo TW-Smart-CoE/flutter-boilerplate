@@ -1,6 +1,6 @@
-import 'package:first_demo/common/network/moments/model/comment.dart';
-import 'package:first_demo/common/network/moments/model/image.dart';
-import 'package:first_demo/common/network/moments/model/sender.dart';
+import 'package:first_demo/pages/moments/tweet/model/comment.dart';
+import 'package:first_demo/pages/moments/tweet/model/image.dart';
+import 'package:first_demo/pages/moments/tweet/model/sender.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tweet.g.dart';

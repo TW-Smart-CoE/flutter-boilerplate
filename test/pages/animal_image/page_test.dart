@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_demo/common/network/animal/model/animal.dart';
+import 'package:first_demo/pages/animal_image/model/animal.dart';
 import 'package:first_demo/pages/animal_image/page.dart';
 import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';

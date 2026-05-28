@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/common/async_loader/async_loader.dart';
-import 'package:first_demo/common/network/animal/model/animal.dart';
 import 'package:first_demo/common/scaffold/base_scaffold.dart';
+import 'package:first_demo/pages/animal_image/model/animal.dart';
 import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class AnimalImagePage extends HookWidget {
 
     return BaseScaffold(
       context: context,
-      title: l10n(context).animalImagePageTitle,
+      title: stringsOf(context).animalImagePageTitle,
       body: AsyncLoader<List<Animal>>(
         context: context,
         query: animalsQuery,

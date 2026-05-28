@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:first_demo/common/network/moments/model/tweet.dart';
-import 'package:first_demo/common/network/moments/model/user.dart';
 import 'package:first_demo/common/utils/environment_config.dart';
+import 'package:first_demo/pages/moments/tweet/model/tweet.dart';
+import 'package:first_demo/pages/moments/user/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';

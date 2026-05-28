@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:first_demo/common/network/animal/model/animal.dart';
+import 'package:first_demo/pages/animal_image/model/animal.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';

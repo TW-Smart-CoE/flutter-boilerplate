@@ -26,7 +26,7 @@ class MomentsPage extends HookWidget {
 
     return BaseScaffold(
       context: context,
-      title: l10n(context).momentsPageTitle,
+      title: stringsOf(context).momentsPageTitle,
       body: AsyncLoader<MomentsData>(
         context: context,
         query: momentsQuery,

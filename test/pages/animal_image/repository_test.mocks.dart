@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:first_demo/common/network/animal/api.dart' as _i2;
-import 'package:first_demo/common/network/animal/model/animal.dart' as _i4;
+import 'package:first_demo/pages/animal_image/api.dart' as _i2;
+import 'package:first_demo/pages/animal_image/model/animal.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

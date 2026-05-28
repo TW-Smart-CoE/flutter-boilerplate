@@ -44,7 +44,7 @@ Widget ErrorPlaceholder({
   required VoidCallback onRetry,
 }) {
   final theme = Theme.of(context);
-  final string = l10n(context);
+  final string = stringsOf(context);
   return Container(
     width: double.infinity,
     height: double.infinity,

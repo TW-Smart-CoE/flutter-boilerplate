@@ -1,5 +1,5 @@
-import 'package:first_demo/common/network/animal/api.dart';
-import 'package:first_demo/common/network/animal/model/animal.dart';
+import 'package:first_demo/pages/animal_image/api.dart';
+import 'package:first_demo/pages/animal_image/model/animal.dart';
 import 'package:first_demo/pages/animal_image/repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

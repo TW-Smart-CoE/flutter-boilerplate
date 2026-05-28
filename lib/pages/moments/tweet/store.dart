@@ -1,4 +1,4 @@
-import 'package:first_demo/common/network/moments/model/tweet.dart';
+import 'package:first_demo/pages/moments/tweet/model/tweet.dart';
 
 class TweetStore {
   static const int _EXPIRE_INTERVAL = 5 * 60 * 1000; // 5 minutes

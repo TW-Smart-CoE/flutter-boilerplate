@@ -1,6 +1,7 @@
 import 'package:first_demo/common/scaffold/app_bar.dart';
 import 'package:first_demo/dev_menu/factory.dart';
 import 'package:first_demo/res/string/strings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
@@ -13,8 +14,8 @@ Widget BaseScaffold({
   Widget? floatingActionButton,
 }) {
   return Scaffold(
-    appBar: appBar ?? DefaultAppBar(title ?? l10n(context).appName),
-    drawer: drawer ?? createDevMenu(),
+    appBar: appBar ?? DefaultAppBar(title ?? stringsOf(context).appName),
+    drawer: drawer ?? (kDebugMode ? createDevMenu() : null),
     body: body,
     floatingActionButton: floatingActionButton,
   );

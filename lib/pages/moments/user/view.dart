@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_demo/common/network/moments/model/user.dart';
+import 'package:first_demo/pages/moments/user/model/user.dart';
 import 'package:first_demo/res/theme/dimension.dart';
 import 'package:first_demo/res/theme/shape.dart';
 import 'package:flutter/material.dart';

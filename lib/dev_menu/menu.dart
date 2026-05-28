@@ -16,7 +16,7 @@ class DevMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final string = l10n(context);
+    final string = stringsOf(context);
     final items = _buildItems();
     return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: [

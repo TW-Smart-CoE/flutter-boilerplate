@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class DioClient {
+class HttpClient {
   late final Dio dio;
 
-  DioClient() {
+  HttpClient() {
     dio = Dio(
       BaseOptions(
         connectTimeout: const Duration(milliseconds: 5000),
