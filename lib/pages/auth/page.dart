@@ -3,11 +3,9 @@ import 'package:first_demo/common/utils/logger.dart';
 import 'package:first_demo/pages/auth/repository.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/res/theme/dimension.dart';
-import 'package:first_demo/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
-import 'package:go_router/go_router.dart';
 
 typedef LoginParams = ({String username, String password});
 
@@ -25,11 +23,6 @@ class AuthPage extends HookWidget {
 
     final loginMutation = useMutation<void, Exception, LoginParams, void>(
       (params) => _repository.login(params.username, params.password),
-      onSuccess: (_, __, ___) {
-        if (context.mounted) {
-          context.go(Routes.INITIAL);
-        }
-      },
       onError: (error, _, __) {
         logger.e('Login failed', error: error);
       },

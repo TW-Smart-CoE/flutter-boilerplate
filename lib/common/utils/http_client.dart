@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:first_demo/common/states/auth_state.dart';
 import 'package:first_demo/common/utils/token_store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -40,5 +41,13 @@ class _TokenInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
     handler.next(options);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (err.response?.statusCode == 401) {
+      authState.logout();
+    }
+    handler.next(err);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:first_demo/common/utils/token_store.dart';
+import 'package:first_demo/common/states/auth_state.dart';
 import 'package:first_demo/pages/animal_image/page.dart';
 import 'package:first_demo/pages/auth/page.dart';
 import 'package:first_demo/pages/counter/page.dart';
@@ -15,8 +15,9 @@ abstract class Routes {
 
 final GoRouter appRouter = GoRouter(
   initialLocation: Routes.INITIAL,
-  redirect: (context, state) async {
-    final isLoggedIn = await tokenStore.hasToken();
+  refreshListenable: authState.isLoggedIn,
+  redirect: (context, state) {
+    final isLoggedIn = authState.isLoggedIn.value;
     final isOnLoginPage = state.matchedLocation == Routes.LOGIN;
 
     if (!isLoggedIn && !isOnLoginPage) {
