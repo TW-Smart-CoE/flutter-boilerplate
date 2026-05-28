@@ -16,3 +16,5 @@ class TokenStore {
 
   Future<bool> hasToken() async => (await getToken()) != null;
 }
+
+final tokenStore = TokenStore();

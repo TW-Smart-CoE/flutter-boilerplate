@@ -36,7 +36,6 @@ dependencies:
   # foundation
   intl: any
   logger: ^2.6.0
-  get_it: ^9.2.1
   awesome_extensions: ^2.1.0
   flutter_dotenv: ^6.0.1
 

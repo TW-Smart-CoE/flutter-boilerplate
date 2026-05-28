@@ -1,4 +1,4 @@
-import 'package:first_demo/common/utils/di.dart';
+import 'package:first_demo/common/utils/http_client.dart';
 import 'package:first_demo/pages/moments/api.dart';
 import 'package:first_demo/pages/moments/tweet/model/tweet.dart';
 import 'package:first_demo/pages/moments/tweet/store.dart';
@@ -8,7 +8,7 @@ class TweetRepository {
   final _tweetStore = TweetStore();
 
   TweetRepository({MomentsApi? momentsApi})
-      : _momentsApi = momentsApi ?? getIt<MomentsApi>();
+      : _momentsApi = momentsApi ?? MomentsApi(httpClient.dio);
 
   Future<List<Tweet>> getTweets(int startIndex, int count) async {
     final List<Tweet> tweetList;

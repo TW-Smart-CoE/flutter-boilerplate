@@ -1,4 +1,3 @@
-import 'package:first_demo/common/utils/di.dart';
 import 'package:first_demo/common/utils/token_store.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/string/strings.dart';
@@ -51,7 +50,7 @@ class DevMenu extends StatelessWidget {
             style: TextStyle(color: theme.colorScheme.error),
           ),
           onTap: () async {
-            await getIt<TokenStore>().clearToken();
+            await tokenStore.clearToken();
             if (context.mounted) {
               context.go(Routes.LOGIN);
             }

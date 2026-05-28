@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:first_demo/common/utils/di.dart';
+import 'package:first_demo/common/utils/http_client.dart';
 import 'package:first_demo/pages/animal_image/api.dart';
 import 'package:first_demo/pages/animal_image/model/animal.dart';
 
@@ -8,7 +8,7 @@ class AnimalImageRepository {
   final AnimalApi _animalApi;
 
   AnimalImageRepository({AnimalApi? animalApi})
-      : _animalApi = animalApi ?? getIt<AnimalApi>();
+      : _animalApi = animalApi ?? AnimalApi(httpClient.dio);
 
   Future<List<Animal>> getCats() => _animalApi.getAnimals('cat');
 

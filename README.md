@@ -4,15 +4,15 @@
 
 ## 技术栈
 
-| 能力 | 方案 |
-|------|------|
-| 路由 | [go_router](https://pub.dev/packages/go_router) |
-| 依赖注入 | [get_it](https://pub.dev/packages/get_it) |
-| 状态管理 | [flutter_hooks](https://pub.dev/packages/flutter_hooks) |
-| 异步数据加载 | [fquery](https://pub.dev/packages/fquery)（类 React Query） |
-| 国际化 | Flutter 原生 gen-l10n（ARB） |
-| 网络请求 | [Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) + [json_serializable](https://pub.dev/packages/json_serializable) |
-| 测试 | flutter_test + [mockito](https://pub.dev/packages/mockito) + [flutter_hooks_test](https://pub.dev/packages/flutter_hooks_test) |
+| 能力     | 方案                                                                                                                                                    |
+|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 路由     | [go_router](https://pub.dev/packages/go_router)                                                                                                       |
+| 单例管理   | 顶层变量（无需 DI 框架）                                                                                                                                        |
+| 状态管理   | [flutter_hooks](https://pub.dev/packages/flutter_hooks)                                                                                               |
+| 异步数据加载 | [fquery](https://pub.dev/packages/fquery)（类 React Query）                                                                                              |
+| 国际化    | Flutter 原生 gen-l10n（ARB）                                                                                                                              |
+| 网络请求   | [Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) + [json_serializable](https://pub.dev/packages/json_serializable) |
+| 测试     | flutter_test + [mockito](https://pub.dev/packages/mockito) + [flutter_hooks_test](https://pub.dev/packages/flutter_hooks_test)                        |
 
 ## 1. 核心部分
 
@@ -29,11 +29,17 @@ lib # Flutter代码根目录
 │   │   ├── app_bar.dart        # 通用 AppBar
 │   │   └── base_scaffold.dart  # 基础页面脚手架
 │   └── utils     # 工具类
-│       ├── di.dart              # 依赖注入配置（get_it）
 │       ├── environment_config.dart # 环境配置
-│       ├── http_client.dart     # 网络请求客户端
+│       ├── global_error_handler.dart # 全局错误处理
+│       ├── http_client.dart     # 网络请求客户端（含顶层单例 httpClient）
+│       ├── token_store.dart     # Token 存储（含顶层单例 tokenStore）
 │       └── logger.dart          # 日志工具
 ├── pages # 以页面为单位组织所有相关业务逻辑代码（含 API、Model）
+│   ├── auth # 登录认证页面
+│   │   ├── api.dart                        # 登录 API 接口定义（retrofit）
+│   │   ├── model.dart                      # AuthRequest / AuthResponse 数据模型
+│   │   ├── page.dart(AuthPage)             # HookWidget + useMutation 处理登录
+│   │   └── repository.dart(AuthRepository) # 登录 & Token 管理逻辑
 │   ├── counter # 计数器页面
 │   │   ├── page.dart(CounterPage)         # HookWidget，渲染UI
 │   │   └── use_counter.dart(useCounter)   # 自定义 Hook，管理计数状态
@@ -95,29 +101,76 @@ lib # Flutter代码根目录
 对于异步数据加载（如 AnimalImage、Moments），使用 `useQuery` + `Repository` + `AsyncLoader` 组合。
 API 接口定义和数据模型与页面代码放在同一目录下，按业务内聚组织。
 
-### 1.3 页面路由
+### 1.3 页面路由与认证守卫
 
 使用 [go_router](https://pub.dev/packages/go_router) 管理路由，配置在 `routes.dart` 中。
 go_router 是 Flutter 官方推荐的声明式路由方案，支持深度链接、重定向、路由守卫等。
 
-### 1.4 依赖注入
+项目通过 `redirect` 实现了路由守卫：未登录时自动跳转到登录页，已登录时访问登录页会重定向到首页。
 
-使用 [get_it](https://pub.dev/packages/get_it) 作为 Service Locator，配置在 `lib/common/utils/di.dart` 中。
-仅注册全局基础设施层对象（HttpClient、Api），Repository 层按需实例化，不注册到 DI 容器。
+```dart
+redirect:
 
-### 1.5 状态管理
+(context, state) async
+{
+
+final isLoggedIn = await
+tokenStore.hasToken
+();if
+(!isLoggedIn && !isOnLoginPage) return Routes.LOGIN;
+if (isLoggedIn && isOnLoginPage) return Routes.INITIAL;
+return
+null;
+}
+```
+
+### 1.4 Token 管理与登录
+
+- **TokenStore**（`lib/common/utils/token_store.dart`）：基于 `SharedPreferences` 持久化存储
+  Token，作为顶层单例供全局使用
+- **AuthPage**：使用 `useMutation` 处理登录异步操作，登录成功后自动跳转
+- **_TokenInterceptor**（`http_client.dart` 内部）：Dio 拦截器，自动为每个请求附加
+  `Authorization: Bearer <token>` 头
+- **Dev Menu**：提供 Logout 功能，清除 Token 并跳回登录页
+
+### 1.5 单例管理
+
+本项目不使用 DI 框架，而是利用 Dart 顶层变量的天然特性来管理单例：
+
+- **顶层变量天然是懒加载且全局唯一的**，适用于全局基础设施（如 `httpClient`、`tokenStore`）
+- **组件级对象**（如 Repository）由使用方直接构造，生命周期自然跟随组件
+- **测试友好**：Repository 等类通过构造函数可选参数注入依赖，测试时传入 mock 即可
+
+```dart
+// token_store.dart — 顶层单例
+final tokenStore = TokenStore();
+
+// http_client.dart — 顶层单例
+final httpClient = HttpClient();
+
+// repository.dart — 组件级，构造时使用顶层单例作为默认值
+class AuthRepository {
+  AuthRepository({AuthApi? authApi, TokenStore? store})
+    : _authApi = authApi ?? AuthApi(httpClient.dio),
+      _tokenStore = store ?? tokenStore;
+}
+```
+
+### 1.6 状态管理
 
 使用 [flutter_hooks](https://pub.dev/packages/flutter_hooks)：
 - `useState` — 简单的局部状态
 - `useQuery`（来自 [fquery](https://pub.dev/packages/fquery)）— 异步数据获取、缓存、重试
+- `useMutation`（来自 [fquery](https://pub.dev/packages/fquery)）— 异步写操作（如登录、提交表单），支持
+  onSuccess/onError 回调
 
-### 1.6 网络库
+### 1.7 网络库
 
 使用 [Dio](https://pub.dev/packages/dio) + [retrofit](https://pub.dev/packages/retrofit) +
 [json_serializable](https://pub.dev/packages/json_serializable) 组合。
 Dio 类似于 Android 中的 OkHttp，retrofit 类似于 Android 中的 Retrofit，json_serializable 类似于 Gson。
 
-### 1.7 异步加载组件
+### 1.8 异步加载组件
 
 `lib/common/async_loader/async_loader.dart` 提供了 `AsyncLoader<T>` 组件，
 基于 fquery 的 `QueryResult` 自动处理 Loading / Error / Success 三种状态的 UI 切换：
@@ -130,7 +183,7 @@ AsyncLoader<List<Animal>>(
 )
 ```
 
-### 1.8 国际化
+### 1.9 国际化
 
 使用 Flutter 原生的 `gen-l10n` 方案：
 - ARB 文件位于 `lib/res/string/`（`app_en.arb`、`app_zh.arb`）
@@ -138,7 +191,7 @@ AsyncLoader<List<Animal>>(
 - 使用方式：`l10n(context).yourStringKey`
 - 添加新字符串后运行 `flutter gen-l10n`
 
-### 1.9 持久化
+### 1.10 持久化
 
 > TODO: 预计选用 [hive](https://pub.dev/packages/hive)
 

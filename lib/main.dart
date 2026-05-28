@@ -1,4 +1,3 @@
-import 'package:first_demo/common/utils/di.dart';
 import 'package:first_demo/common/utils/environment_config.dart';
 import 'package:first_demo/common/utils/global_error_handler.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
@@ -23,7 +22,6 @@ void main() {
   GlobalErrorHandler.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await loadEnvironmentConfig();
-    setupDependencyInjection();
 
     runApp(CacheProvider(
       cache: queryCache,

@@ -1,4 +1,4 @@
-import 'package:first_demo/common/utils/di.dart';
+import 'package:first_demo/common/utils/http_client.dart';
 import 'package:first_demo/common/utils/token_store.dart';
 import 'package:first_demo/pages/auth/api.dart';
 import 'package:first_demo/pages/auth/model.dart';
@@ -7,9 +7,9 @@ class AuthRepository {
   final AuthApi _authApi;
   final TokenStore _tokenStore;
 
-  AuthRepository({AuthApi? authApi, TokenStore? tokenStore})
-      : _authApi = authApi ?? getIt<AuthApi>(),
-        _tokenStore = tokenStore ?? getIt<TokenStore>();
+  AuthRepository({AuthApi? authApi, TokenStore? store})
+      : _authApi = authApi ?? AuthApi(httpClient.dio),
+        _tokenStore = store ?? tokenStore;
 
   Future<void> login(String username, String password) async {
     final response = await _authApi.login(

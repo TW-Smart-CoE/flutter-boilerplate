@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:first_demo/common/utils/di.dart';
 import 'package:first_demo/common/utils/token_store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -24,11 +23,12 @@ class HttpClient {
   }
 }
 
+final httpClient = HttpClient();
+
 class _TokenInterceptor extends Interceptor {
   final TokenStore _tokenStore;
 
-  _TokenInterceptor({TokenStore? tokenStore})
-      : _tokenStore = tokenStore ?? getIt<TokenStore>();
+  _TokenInterceptor({TokenStore? store}) : _tokenStore = store ?? tokenStore;
 
   @override
   void onRequest(
