@@ -4,20 +4,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/pages/animal_image/model/animal.dart';
 import 'package:first_demo/pages/animal_image/page.dart';
 import 'package:first_demo/pages/animal_image/repository.dart';
-import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fquery/fquery.dart';
-import 'package:fquery_core/fquery_core.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../common/utils/test_util.dart';
 import 'page_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AnimalImageRepository>()])
 void main() {
   late MockAnimalImageRepository mockRepository;
-  late QueryCache queryCache;
 
   final animals = List.generate(
     6,
@@ -26,34 +23,15 @@ void main() {
 
   setUp(() {
     mockRepository = MockAnimalImageRepository();
-    queryCache = QueryCache();
   });
 
-  Widget buildTestApp(Widget child) {
-    return CacheProvider(
-      cache: queryCache,
-      child: MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('en'),
-        home: child,
-      ),
-    );
-  }
-
-  /// Dispose the fquery widget tree and advance past GC timers
-  /// to avoid "A Timer is still pending" errors.
-  Future<void> disposeQueryCache(WidgetTester tester) async {
-    await tester.pumpWidget(const SizedBox());
-    await tester.pump(const Duration(minutes: 6));
-  }
-
-  testWidgets('should show loading indicator initially', (tester) async {
+  testPage('should show loading indicator initially',
+      (tester, buildPage) async {
     final completer = Completer<List<Animal>>();
     when(mockRepository.getAnimals()).thenAnswer((_) => completer.future);
 
     await tester.pumpWidget(
-      buildTestApp(AnimalImagePage(repository: mockRepository)),
+      buildPage(AnimalImagePage(repository: mockRepository)),
     );
     await tester.pump();
 
@@ -61,64 +39,56 @@ void main() {
 
     completer.complete(animals);
     await tester.pumpAndSettle();
-    await disposeQueryCache(tester);
   });
 
-  testWidgets('should show grid of animals when data loads successfully',
-      (tester) async {
+  testPage('should show grid of animals when data loads successfully',
+      (tester, buildPage) async {
     when(mockRepository.getAnimals()).thenAnswer((_) async => animals);
 
     await tester.pumpWidget(
-      buildTestApp(AnimalImagePage(repository: mockRepository)),
+      buildPage(AnimalImagePage(repository: mockRepository)),
     );
     await tester.pumpAndSettle();
 
     expect(find.byType(GridView), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsNWidgets(animals.length));
-
-    await disposeQueryCache(tester);
   });
 
-  testWidgets('should show error view when fetch fails', (tester) async {
+  testPage('should show error view when fetch fails',
+      (tester, buildPage) async {
     when(mockRepository.getAnimals())
         .thenAnswer((_) async => throw Exception('Network error'));
 
     await tester.pumpWidget(
-      buildTestApp(AnimalImagePage(repository: mockRepository)),
+      buildPage(AnimalImagePage(repository: mockRepository)),
     );
     await tester.pumpAndSettle();
 
     expect(find.byType(GridView), findsNothing);
     expect(find.byType(FilledButton), findsOneWidget);
-
-    await disposeQueryCache(tester);
   });
 
-  testWidgets('should show empty grid when animal list is empty',
-      (tester) async {
+  testPage('should show empty grid when animal list is empty',
+      (tester, buildPage) async {
     when(mockRepository.getAnimals()).thenAnswer((_) async => []);
 
     await tester.pumpWidget(
-      buildTestApp(AnimalImagePage(repository: mockRepository)),
+      buildPage(AnimalImagePage(repository: mockRepository)),
     );
     await tester.pumpAndSettle();
 
     expect(find.byType(GridView), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsNothing);
-
-    await disposeQueryCache(tester);
   });
 
-  testWidgets('should show AppBar with title', (tester) async {
+  testPage('should show AppBar with title', (tester, buildPage) async {
     when(mockRepository.getAnimals()).thenAnswer((_) async => animals);
 
     await tester.pumpWidget(
-      buildTestApp(AnimalImagePage(repository: mockRepository)),
+      buildPage(AnimalImagePage(repository: mockRepository)),
     );
     await tester.pumpAndSettle();
 
     expect(find.byType(AppBar), findsOneWidget);
-
-    await disposeQueryCache(tester);
   });
 }
