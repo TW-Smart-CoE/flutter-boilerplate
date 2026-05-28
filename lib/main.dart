@@ -1,5 +1,6 @@
 import 'package:first_demo/common/utils/di.dart';
 import 'package:first_demo/common/utils/environment_config.dart';
+import 'package:first_demo/common/utils/global_error_handler.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/theme/theme.dart';
 import 'package:first_demo/routes.dart';
@@ -18,13 +19,15 @@ final myApp = MaterialApp.router(
 
 final queryCache = QueryCache();
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await loadEnvironmentConfig();
-  setupDependencyInjection();
+void main() {
+  GlobalErrorHandler.run(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await loadEnvironmentConfig();
+    setupDependencyInjection();
 
-  runApp(CacheProvider(
-    cache: queryCache,
-    child: myApp,
-  ));
+    runApp(CacheProvider(
+      cache: queryCache,
+      child: myApp,
+    ));
+  });
 }
