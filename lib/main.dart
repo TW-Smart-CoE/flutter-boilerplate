@@ -7,24 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fquery_core/fquery_core.dart';
 
-final queryCache = QueryCache();
-
-final myApp = CacheProvider(
-  cache: queryCache,
-  child: MaterialApp.router(
-    debugShowCheckedModeBanner: false,
-    theme: lightTheme,
-    darkTheme: lightTheme,
-    routerConfig: appRouter,
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-  ),
+final myApp = MaterialApp.router(
+  debugShowCheckedModeBanner: false,
+  theme: lightTheme,
+  darkTheme: darkTheme,
+  routerConfig: appRouter,
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
 );
+
+final queryCache = QueryCache();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvironmentConfig();
   setupDependencyInjection();
 
-  runApp(myApp);
+  runApp(CacheProvider(
+    cache: queryCache,
+    child: myApp,
+  ));
 }
