@@ -132,35 +132,87 @@ const _error = ColorShades(
 
 final lightColorScheme = ColorScheme(
   brightness: Brightness.light,
+
+  // Primary
   primary: _primary.base,
   onPrimary: _neutral.light80,
   primaryContainer: _primary.light80,
   onPrimaryContainer: _neutral.darkest,
   inversePrimary: _primary.darkest,
+
+  // Secondary
   secondary: _secondary.base,
   onSecondary: _neutral.lightest,
   secondaryContainer: _secondary.light80,
   onSecondaryContainer: _neutral.darkest,
+
+  // Tertiary
   tertiary: _tertiary.base,
   onTertiary: _neutral.lightest,
   tertiaryContainer: _tertiary.light80,
   onTertiaryContainer: _neutral.darkest,
+
+  // Surface
   surface: _neutral.lightest,
   onSurface: _neutral.darkest,
   surfaceContainerHighest: _neutral.light20,
   onSurfaceVariant: _neutral.dark40,
   surfaceTint: _neutral.light20,
   inverseSurface: _neutral.dark60,
+
+  // Error
   error: _error.base,
   onError: _neutral.lightest,
   errorContainer: _error.lightest,
   onErrorContainer: _neutral.dark80,
+
+  // Outline
   outline: _neutral.base,
   outlineVariant: _neutral.light40,
   scrim: _neutral.dark80,
 );
 
-const ColorScheme darkColorScheme = ColorScheme.dark();
+final darkColorScheme = ColorScheme(
+  brightness: Brightness.dark,
+
+  // Primary
+  primary: _primary.light20,
+  onPrimary: _primary.darkest,
+  primaryContainer: _primary.dark40,
+  onPrimaryContainer: _primary.light80,
+  inversePrimary: _primary.base,
+
+  // Secondary
+  secondary: _secondary.light60,
+  onSecondary: _neutral.darkest,
+  secondaryContainer: _secondary.dark20,
+  onSecondaryContainer: _secondary.light80,
+
+  // Tertiary
+  tertiary: _tertiary.dark20,
+  onTertiary: _neutral.darkest,
+  tertiaryContainer: _tertiary.darkest,
+  onTertiaryContainer: _tertiary.lightest,
+
+  // Surface
+  surface: _neutral.dark80,
+  onSurface: _neutral.light60,
+  surfaceContainerHighest: _neutral.dark60,
+  onSurfaceVariant: _neutral.light20,
+  surfaceTint: _neutral.dark60,
+  inverseSurface: _neutral.light60,
+
+  // Error
+  error: _error.light20,
+  onError: _error.darkest,
+  errorContainer: _error.dark40,
+  onErrorContainer: _error.light80,
+
+  // Outline
+  outline: _neutral.dark20,
+  outlineVariant: _neutral.dark40,
+  scrim: _neutral.darkest,
+);
 
 const AppColorPalette = ColorPalette(
   primary: _primary,

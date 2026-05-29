@@ -10,8 +10,8 @@ import 'package:fquery_core/fquery_core.dart';
 
 final _app = MaterialApp.router(
   debugShowCheckedModeBanner: false,
-  theme: lightTheme,
-  darkTheme: darkTheme,
+  theme: darkTheme,
+  darkTheme: lightTheme,
   routerConfig: appRouter,
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,

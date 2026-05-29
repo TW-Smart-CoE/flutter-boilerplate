@@ -6,18 +6,8 @@ final Env = dotenv.env;
 Future<void> loadEnvironmentConfig() async {
   const env = String.fromEnvironment('ENV', defaultValue: 'dev');
   switch (env) {
-    case 'dev':
+    case 'dev' || 'qa' || 'stage' || 'prod':
       await dotenv.load(fileName: 'config/$env.env');
-      break;
-    case 'qa':
-      await dotenv.load(fileName: 'config/$env.env');
-      break;
-    case 'stage':
-      await dotenv.load(fileName: 'config/$env.env');
-      break;
-    case 'prod':
-      await dotenv.load(fileName: 'config/$env.env');
-      break;
     default:
       throw Exception('Unknown environment: $env');
   }

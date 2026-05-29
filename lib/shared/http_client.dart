@@ -28,8 +28,11 @@ class HttpClient {
 
 class _TokenInterceptor extends Interceptor {
   final TokenStore _tokenStore;
+  final AuthState _authState;
 
-  _TokenInterceptor({TokenStore? store}) : _tokenStore = store ?? tokenStore;
+  _TokenInterceptor({TokenStore? store, AuthState? state})
+      : _tokenStore = store ?? tokenStore,
+        _authState = state ?? authState;
 
   @override
   void onRequest(
@@ -46,7 +49,7 @@ class _TokenInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      authState.logout();
+      _authState.logout();
     }
     handler.next(err);
   }

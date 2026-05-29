@@ -269,6 +269,7 @@ AsyncLoader<List<Animal>>(
 - `parameter_assignments` → **error**：禁止对函数参数重新赋值
 - `prefer_single_quotes` → 统一使用单引号
 - `prefer_final_fields` / `prefer_final_locals` / `prefer_final_in_for_each` → 尽可能使用 `final`
+- `constant_identifier_names` → 常量建议使用大写蛇形命名（如 `SCREAMING_SNAKE_CASE`）
 - `lines_longer_than_80_chars` → 关闭（项目使用 100 字符行宽）
 - 排除 `**.g.dart` 生成文件
 
