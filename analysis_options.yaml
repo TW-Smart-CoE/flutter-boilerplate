@@ -12,6 +12,9 @@ analyzer:
   exclude:
     - "**.g.dart"
 
+formatter:
+  page_width: 100
+
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
@@ -34,6 +37,7 @@ linter:
     prefer_final_fields: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
+    lines_longer_than_80_chars: false  # Disabled: using 120 chars line width
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -1,7 +1,7 @@
-import 'package:first_demo/common/states/auth_state.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/string/strings.dart';
 import 'package:first_demo/routes.dart';
+import 'package:first_demo/states/state_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

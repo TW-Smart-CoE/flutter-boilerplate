@@ -1,14 +1,14 @@
-import 'package:first_demo/common/states/auth_state.dart';
-import 'package:first_demo/common/utils/environment_config.dart';
-import 'package:first_demo/common/utils/global_error_handler.dart';
 import 'package:first_demo/res/string/generated/app_localizations.dart';
 import 'package:first_demo/res/theme/theme.dart';
 import 'package:first_demo/routes.dart';
+import 'package:first_demo/shared/environment_config.dart';
+import 'package:first_demo/states/state_auth.dart';
+import 'package:first_demo/utils/global_error_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fquery_core/fquery_core.dart';
 
-final myApp = MaterialApp.router(
+final _app = MaterialApp.router(
   debugShowCheckedModeBanner: false,
   theme: lightTheme,
   darkTheme: darkTheme,
@@ -17,17 +17,16 @@ final myApp = MaterialApp.router(
   supportedLocales: AppLocalizations.supportedLocales,
 );
 
-final queryCache = QueryCache();
+final _queryCache = QueryCache();
 
 void main() {
   GlobalErrorHandler.run(() async {
-    WidgetsFlutterBinding.ensureInitialized();
     await loadEnvironmentConfig();
     await authState.init();
 
     runApp(CacheProvider(
-      cache: queryCache,
-      child: myApp,
+      cache: _queryCache,
+      child: _app,
     ));
   });
 }

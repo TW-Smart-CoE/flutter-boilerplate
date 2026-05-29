@@ -1,16 +1,16 @@
-import 'package:first_demo/common/states/auth_state.dart';
-import 'package:first_demo/pages/animal_image/page.dart';
-import 'package:first_demo/pages/auth/page.dart';
-import 'package:first_demo/pages/counter/page.dart';
-import 'package:first_demo/pages/moments/page.dart';
+import 'package:first_demo/pages/animal_image/page_animal_image.dart';
+import 'package:first_demo/pages/auth/page_auth.dart';
+import 'package:first_demo/pages/counter/page_counter.dart';
+import 'package:first_demo/pages/moments/page_moments.dart';
+import 'package:first_demo/states/state_auth.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class Routes {
+  static const INITIAL = MOMENTS;
   static const LOGIN = '/login';
   static const COUNTER = '/counter';
   static const ANIMAL_IMAGE = '/animal_image';
   static const MOMENTS = '/moments';
-  static const INITIAL = MOMENTS;
 }
 
 final GoRouter appRouter = GoRouter(
