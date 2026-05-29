@@ -22,7 +22,7 @@
 
 ``` yaml
 lib # Flutter代码根目录
-├── pages # 以页面为单位组织所有相关业务逻辑代码（含 API、Model）
+├── features # 以功能点为单位组织所有相关业务逻辑代码（含 API、Model）
 │   ├── auth # 登录认证页面
 │   │   ├── api_auth.dart             # 登录 API 接口定义
 │   │   ├── model_auth.dart           # Auth 数据模型
@@ -132,11 +132,11 @@ lib # Flutter代码根目录
 项目以 **业务单元（数据流）** 为最小单位组织代码，每个页面目录包含该业务完整的三层代码：
 
 ``` yaml
-pages/counter/
+features/counter/
 ├── page_counter.dart             # UI 层
 └── use_counter.dart              # 流程控制层（无需纯逻辑层）
 
-pages/animal_image/
+features/animal_image/
 ├── page_animal_image.dart        # UI 层（useQuery 充当流程控制层）
 └── repository_animal_image.dart  # 纯逻辑层
 ```

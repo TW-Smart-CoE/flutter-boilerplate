@@ -1,7 +1,7 @@
-import 'package:first_demo/pages/animal_image/page_animal_image.dart';
-import 'package:first_demo/pages/auth/page_auth.dart';
-import 'package:first_demo/pages/counter/page_counter.dart';
-import 'package:first_demo/pages/moments/page_moments.dart';
+import 'package:first_demo/features/animal_image/page_animal_image.dart';
+import 'package:first_demo/features/auth/page_auth.dart';
+import 'package:first_demo/features/counter/page_counter.dart';
+import 'package:first_demo/features/moments/page_moments.dart';
 import 'package:first_demo/states/state_auth.dart';
 import 'package:go_router/go_router.dart';
 
