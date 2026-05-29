@@ -36,7 +36,10 @@ if [ "$lcov_available" = true ]; then
   lcov --remove "$LCOV_FILE" \
     '**/*.g.dart' \
     '**/generated/*' \
-    '**/res/*' \
+    '**/model/*' \
+    '**/model_*.dart' \
+    'lib/res/*' \
+    'lib/dev_menu/*' \
     -o "$FILTERED_LCOV" \
     --quiet
   LCOV_FILE="$FILTERED_LCOV"

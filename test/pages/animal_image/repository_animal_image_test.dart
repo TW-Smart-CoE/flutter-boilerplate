@@ -27,68 +27,62 @@ void main() {
     repository = AnimalImageRepository(animalApi: mockApi);
   });
 
-  group('getCats', () {
-    test('should call api with "cat"', () async {
-      when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
+  test('should call api with "cat"', () async {
+    when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
 
-      final result = await repository.getCats();
+    final result = await repository.getCats();
 
-      expect(result, cats);
-      verify(mockApi.getAnimals('cat')).called(1);
-    });
+    expect(result, cats);
+    verify(mockApi.getAnimals('cat')).called(1);
   });
 
-  group('getDogs', () {
-    test('should call api with "dog"', () async {
-      when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
+  test('should call api with "dog"', () async {
+    when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
 
-      final result = await repository.getDogs();
+    final result = await repository.getDogs();
 
-      expect(result, dogs);
-      verify(mockApi.getAnimals('dog')).called(1);
-    });
+    expect(result, dogs);
+    verify(mockApi.getAnimals('dog')).called(1);
   });
 
-  group('getAnimals', () {
-    test('should combine cats and dogs excluding first element of each', () async {
-      when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
-      when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
+  test('should combine cats and dogs excluding first element of each', () async {
+    when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
+    when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
 
-      final result = await repository.getAnimals();
+    final result = await repository.getAnimals();
 
-      // First element of each list is excluded (sublist(1))
-      expect(result.length, (cats.length - 1) + (dogs.length - 1));
-      // All remaining cats and dogs should be present
-      for (final cat in cats.sublist(1)) {
-        expect(result.contains(cat), isTrue);
-      }
-      for (final dog in dogs.sublist(1)) {
-        expect(result.contains(dog), isTrue);
-      }
-    });
+    // First element of each list is excluded (sublist(1))
+    expect(result.length, (cats.length - 1) + (dogs.length - 1));
+    // All remaining cats and dogs should be present
+    for (final cat in cats.sublist(1)) {
+      expect(result.contains(cat), isTrue);
+    }
+    for (final dog in dogs.sublist(1)) {
+      expect(result.contains(dog), isTrue);
+    }
+  });
 
-    test('should call both cat and dog APIs', () async {
-      when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
-      when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
+  test('should call both cat and dog APIs', () async {
+    when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
+    when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
 
-      await repository.getAnimals();
+    await repository.getAnimals();
 
-      verify(mockApi.getAnimals('cat')).called(1);
-      verify(mockApi.getAnimals('dog')).called(1);
-    });
+    verify(mockApi.getAnimals('cat')).called(1);
+    verify(mockApi.getAnimals('dog')).called(1);
+  });
 
-    test('should throw when cat API fails', () async {
-      when(mockApi.getAnimals('cat')).thenThrow(Exception('cat API error'));
-      when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
+  test('should throw when cat API fails', () async {
+    when(mockApi.getAnimals('cat')).thenThrow(Exception('cat API error'));
+    when(mockApi.getAnimals('dog')).thenAnswer((_) async => dogs);
 
-      expect(() => repository.getAnimals(), throwsException);
-    });
+    expect(() => repository.getAnimals(), throwsException);
+  });
 
-    test('should throw when dog API fails', () async {
-      when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
-      when(mockApi.getAnimals('dog')).thenThrow(Exception('dog API error'));
+  test('should throw when dog API fails', () async {
+    when(mockApi.getAnimals('cat')).thenAnswer((_) async => cats);
+    when(mockApi.getAnimals('dog')).thenThrow(Exception('dog API error'));
 
-      expect(() => repository.getAnimals(), throwsException);
-    });
+    expect(() => repository.getAnimals(), throwsException);
   });
 }
