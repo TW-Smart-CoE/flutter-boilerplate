@@ -6,17 +6,18 @@ import '../../test_utils/test_util.dart';
 
 void main() {
   testPage('Counter increments smoke test', (tester, buildPage) async {
+    // given
     await tester.pumpWidget(buildPage(const CounterPage()));
 
-    // Verify that our counter starts at 0.
+    // then
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
+    // when
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
+    // then
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });

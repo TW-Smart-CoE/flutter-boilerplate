@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-COVERAGE_THRESHOLD=20  # Minimum coverage percentage required (increase as tests grow)
+COVERAGE_THRESHOLD=80  # Minimum coverage percentage required (increase as tests grow)
 EXCLUDE_PATTERNS=(
   '**/*.g.dart'
   '**/generated/*'

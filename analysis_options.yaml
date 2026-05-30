@@ -11,6 +11,9 @@ analyzer:
     parameter_assignments: error
   exclude:
     - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.mocks.dart"
+    - "lib/res/string/generated/**"
 
 formatter:
   page_width: 100
