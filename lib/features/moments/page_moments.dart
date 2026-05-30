@@ -1,8 +1,8 @@
 import 'package:first_demo/features/moments/repository_moments.dart';
-import 'package:first_demo/features/moments/tweet/view_tweet.dart';
-import 'package:first_demo/features/moments/user/view_user.dart';
+import 'package:first_demo/features/moments/tweet/index.dart';
+import 'package:first_demo/features/moments/user/index.dart';
 import 'package:first_demo/res/string/strings.dart';
-import 'package:first_demo/widgets/async_loader/async_loader.dart';
+import 'package:first_demo/widgets/async_loader/index.dart';
 import 'package:first_demo/widgets/scaffold/base_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

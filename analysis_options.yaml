@@ -38,6 +38,8 @@ linter:
     prefer_final_in_for_each: true
     prefer_final_locals: true
     lines_longer_than_80_chars: false  # Disabled: using 120 chars line width
+    always_use_package_imports: true
+    avoid_relative_lib_imports: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -1,7 +1,7 @@
-import 'package:first_demo/features/animal_image/page_animal_image.dart';
-import 'package:first_demo/features/auth/page_auth.dart';
-import 'package:first_demo/features/counter/page_counter.dart';
-import 'package:first_demo/features/moments/page_moments.dart';
+import 'package:first_demo/features/animal_image/index.dart';
+import 'package:first_demo/features/auth/index.dart';
+import 'package:first_demo/features/counter/index.dart';
+import 'package:first_demo/features/moments/index.dart';
 import 'package:first_demo/states/state_auth.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,21 +29,9 @@ final GoRouter appRouter = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(
-      path: Routes.LOGIN,
-      builder: (context, state) => AuthPage(),
-    ),
-    GoRoute(
-      path: Routes.COUNTER,
-      builder: (context, state) => const CounterPage(),
-    ),
-    GoRoute(
-      path: Routes.ANIMAL_IMAGE,
-      builder: (context, state) => AnimalImagePage(),
-    ),
-    GoRoute(
-      path: Routes.MOMENTS,
-      builder: (context, state) => MomentsPage(),
-    ),
+    GoRoute(path: Routes.LOGIN, builder: (context, state) => AuthPage()),
+    GoRoute(path: Routes.COUNTER, builder: (context, state) => const CounterPage()),
+    GoRoute(path: Routes.ANIMAL_IMAGE, builder: (context, state) => AnimalImagePage()),
+    GoRoute(path: Routes.MOMENTS, builder: (context, state) => MomentsPage()),
   ],
 );

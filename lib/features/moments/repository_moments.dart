@@ -1,7 +1,5 @@
-import 'package:first_demo/features/moments/tweet/model/tweet.dart';
-import 'package:first_demo/features/moments/tweet/repository_tweet.dart';
-import 'package:first_demo/features/moments/user/model_user.dart';
-import 'package:first_demo/features/moments/user/repository_user.dart';
+import 'package:first_demo/features/moments/tweet/index.dart';
+import 'package:first_demo/features/moments/user/index.dart';
 
 class MomentsData {
   final User user;

@@ -23,28 +23,34 @@
 ``` yaml
 lib # Flutter代码根目录
 ├── features # 以功能点为单位组织所有相关业务逻辑代码（含 API、Model）
-│   ├── auth # 登录认证页面
+│   ├── auth # 登录认证模块
+│   │   ├── index.dart                # 模块公开入口
 │   │   ├── api_auth.dart             # 登录 API 接口定义
 │   │   ├── model_auth.dart           # Auth 数据模型
 │   │   ├── page_auth.dart            # 登录页面
 │   │   └── repository_auth.dart      # 登录 & Token 管理逻辑
-│   ├── counter # 计数器页面
+│   ├── counter # 计数器模块
+│   │   ├── index.dart                # 模块公开入口
 │   │   ├── page_counter.dart         # 计数器页面
 │   │   └── use_counter.dart          # 管理计数状态的 Hook
-│   ├── animal_image # 展示动物图片的页面
+│   ├── animal_image # 动物图片模块
+│   │   ├── index.dart                    # 模块公开入口
 │   │   ├── api_animal_image.dart         # 动物图片 API 接口定义
 │   │   ├── model_animal_image.dart       # 动物图片数据模型
 │   │   ├── page_animal_image.dart        # 动物图片页面
 │   │   └── repository_animal_image.dart  # 动物图片数据仓库
-│   └── moments # 朋友圈页面
+│   └── moments # 朋友圈模块
+│       ├── index.dart                # 模块公开入口
 │       ├── api_moments.dart          # 朋友圈 API 接口定义
 │       ├── page_moments.dart         # 朋友圈页面
 │       ├── repository_moments.dart   # 朋友圈数据仓库
-│       ├── user/
+│       ├── user/ # 用户子模块
+│       │   ├── index.dart            # 子模块公开入口
 │       │   ├── model_user.dart       # 用户数据模型
 │       │   ├── repository_user.dart  # 用户数据仓库
 │       │   └── view_user.dart        # 用户信息 UI
-│       └── tweet/
+│       └── tweet/ # 推文子模块
+│           ├── index.dart            # 子模块公开入口
 │           ├── model/
 │           │   ├── comment.dart      # 评论数据模型
 │           │   ├── image.dart        # 图片数据模型
@@ -54,7 +60,8 @@ lib # Flutter代码根目录
 │           ├── store_tweet.dart      # 推文数据缓存
 │           └── view_tweet.dart       # 推文列表 UI
 ├── widgets   # 跨页面共享的 UI 组件
-│   ├── async_loader # 异步加载组件
+│   ├── async_loader # 异步加载模块
+│   │   ├── index.dart                # 模块公开入口
 │   │   ├── async_loader.dart         # 配合 useQuery 处理加载动画的组件
 │   │   ├── error_placeholder.dart    # 错误占位 Widget
 │   │   └── loading_placeholder.dart  # 加载占位 Widget
@@ -94,7 +101,7 @@ lib # Flutter代码根目录
 本项目采用 **三层架构 + 纵向切分**
 的设计模式，灵感来源于[通用应用架构](https://juejin.cn/post/7390569548367970314)。
 
-#### 横向分层
+#### 1.2.1 横向分层
 
 | 层次        | 实现方式                                     | 职责                             |
 |-----------|------------------------------------------|--------------------------------|
@@ -104,7 +111,7 @@ lib # Flutter代码根目录
 
 数据流方向：用户事件 → 流程控制层 → 纯逻辑层 → 返回结果 → 更新 UI State → UI 重绘。
 
-#### 各层职责详解
+#### 1.2.2 各层职责详解
 
 **UI 层**（组件函数）：
 
@@ -127,7 +134,7 @@ lib # Flutter代码根目录
 - 有状态组件用 Store 实现（如 `AuthState`，维护登录状态的状态机）
 - 检验标准：能否通过命令行调用来实现核心功能
 
-#### 纵向切分（Vertical Slicing）
+#### 1.2.3 纵向切分（Vertical Slicing）
 
 项目以 **业务单元（数据流）** 为最小单位组织代码，每个页面目录包含该业务完整的三层代码：
 
@@ -143,12 +150,13 @@ features/animal_image/
 
 这种组织方式使得每个业务单元是独立整体，可以单独修改、移动或删除，很好地应对需求变化。
 
-#### 文件命名规则
+#### 1.2.4 文件命名规则
 
 业务组件文件采用 **类型前置** 的命名规范：`{类型}_{业务名}.dart`，例如：
 
 | 类型         | 命名示例                           | 所在层级  | 说明           |
 |------------|--------------------------------|-------|--------------|
+| index      | `index.dart`                   | —     | 模块公开入口       |
 | page       | `page_counter.dart`            | UI 层  | 页面 UI 组件     |
 | view       | `view_user.dart`               | UI 层  | 子视图组件        |
 | use        | `use_counter.dart`             | 流程控制层 | 自定义 Hook     |
@@ -160,6 +168,37 @@ features/animal_image/
 
 这样做的好处是在文件列表中可以快速按类型分组识别，同时避免不同业务模块中出现大量同名的 `page.dart`、
 `repository.dart` 等文件。
+
+#### 1.2.5 模块边界规则
+
+本项目采用基于目录树的模块边界规则，用于隐藏模块内部实现，限制跨模块的直接依赖。
+
+1. **模块声明:** 包含 `index.dart` 的目录被视为一个模块。没有 `index.dart` 的目录仅作为普通分类目录，
+   不单独形成模块边界。
+
+2. **模块公开入口:** 每个模块通过自己的 `index.dart` 声明对外公开的 API，其他文件默认都是内部实现。
+   `index.dart` 应暴露模块能力，而不是暴露模块内部结构。默认使用 `show` 精确控制公开成员，避免无选择地导出
+   API、Repository、Store、Mapper 等内部实现。
+
+3. **外部访问规则:** 模块外部只能 import 该模块的 `index.dart`。也就是说，外部只能依赖模块公开入口，
+   不能绕过 `index.dart` 访问模块内部文件。
+
+4. **子模块访问规则:** 模块在访问自己的直接子模块时，也只能通过子模块的 `index.dart` 访问。
+   不允许越过子模块访问其内部文件，也不允许越级访问孙模块或更深层节点。
+
+5. **内部访问规则:** 模块内部文件可以直接互相 import，因为这些文件属于同一个模块边界内部。
+   子模块对直系父模块拥有 protected 级别访问权，因此子模块可以访问直系父模块的内部文件。
+
+6. **祖先模块访问规则:** 模块可以访问任意祖先模块通过 `index.dart` 暴露的能力，不允许直接访问祖先模块的
+   内部文件。
+
+7. **例外规则:** 测试代码与生成代码不参与模块边界检查。
+
+可运行以下脚本检查模块边界：
+
+```bash
+bash .husky/check_module_boundaries.sh
+```
 
 ### 1.3 页面路由与认证守卫
 

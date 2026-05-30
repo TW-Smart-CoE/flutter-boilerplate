@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-dart format . && flutter analyze
+dart format . && flutter analyze && bash .husky/check_module_boundaries.sh

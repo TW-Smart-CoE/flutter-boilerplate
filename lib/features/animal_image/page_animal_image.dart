@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:first_demo/features/animal_image/model_animal_image.dart';
 import 'package:first_demo/features/animal_image/repository_animal_image.dart';
 import 'package:first_demo/res/string/strings.dart';
-import 'package:first_demo/widgets/async_loader/async_loader.dart';
+import 'package:first_demo/widgets/async_loader/index.dart';
 import 'package:first_demo/widgets/scaffold/base_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
