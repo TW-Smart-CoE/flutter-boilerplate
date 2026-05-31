@@ -12,10 +12,19 @@ Widget BaseScaffold({
   Widget? drawer,
   required Widget body,
   Widget? floatingActionButton,
+  FloatingActionButtonLocation? floatingActionButtonLocation,
+  Widget? bottomNavigationBar,
+  bool useSafeArea = true,
+  bool resizeToAvoidBottomInset = true,
+  Color? backgroundColor,
 }) =>
     Scaffold(
       appBar: appBar ?? DefaultAppBar(title ?? stringsOf(context).appName),
       drawer: drawer ?? (kDebugMode ? createDevMenu() : null),
-      body: body,
+      body: useSafeArea ? SafeArea(child: body) : body,
       floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
+      bottomNavigationBar: bottomNavigationBar,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      backgroundColor: backgroundColor,
     );

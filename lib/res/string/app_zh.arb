@@ -17,5 +17,6 @@
   "loginPassword": "密码",
   "loginButton": "登录",
   "loginEmptyFieldsError": "请输入用户名和密码。",
-  "loginFailedError": "登录失败，请重试。"
+  "loginFailedError": "登录失败，请重试。",
+  "calculatorPageTitle": "计算器"
 }

@@ -1,5 +1,6 @@
 import 'package:first_demo/features/animal_image/index.dart';
 import 'package:first_demo/features/auth/index.dart';
+import 'package:first_demo/features/calculator/index.dart';
 import 'package:first_demo/features/counter/index.dart';
 import 'package:first_demo/features/moments/index.dart';
 import 'package:first_demo/states/state_auth.dart';
@@ -9,6 +10,7 @@ abstract class Routes {
   static const INITIAL = MOMENTS;
   static const LOGIN = '/login';
   static const COUNTER = '/counter';
+  static const CALCULATOR = '/calculator';
   static const ANIMAL_IMAGE = '/animal_image';
   static const MOMENTS = '/moments';
 }
@@ -31,6 +33,10 @@ final GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(path: Routes.LOGIN, builder: (context, state) => AuthPage()),
     GoRoute(path: Routes.COUNTER, builder: (context, state) => const CounterPage()),
+    GoRoute(
+      path: Routes.CALCULATOR,
+      builder: (context, state) => const CalculatorPage(),
+    ),
     GoRoute(path: Routes.ANIMAL_IMAGE, builder: (context, state) => AnimalImagePage()),
     GoRoute(path: Routes.MOMENTS, builder: (context, state) => MomentsPage()),
   ],

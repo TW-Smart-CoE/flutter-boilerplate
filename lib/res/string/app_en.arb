@@ -17,5 +17,6 @@
   "loginPassword": "Password",
   "loginButton": "Sign In",
   "loginEmptyFieldsError": "Please enter username and password.",
-  "loginFailedError": "Login failed. Please try again."
+  "loginFailedError": "Login failed. Please try again.",
+  "calculatorPageTitle": "Calculator"
 }

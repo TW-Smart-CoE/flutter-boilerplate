@@ -10,6 +10,7 @@ class DevMenu extends StatelessWidget {
 
   static Map<String Function(AppLocalizations), String> _buildItems() => {
         (AppLocalizations l) => l.counterPageTitle: Routes.COUNTER,
+        (AppLocalizations l) => 'Calculator': Routes.CALCULATOR,
         (AppLocalizations l) => l.animalImagePageTitle: Routes.ANIMAL_IMAGE,
         (AppLocalizations l) => l.momentsPageTitle: Routes.MOMENTS,
       };

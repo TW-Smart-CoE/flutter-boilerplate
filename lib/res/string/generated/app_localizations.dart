@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login failed. Please try again.'**
   String get loginFailedError;
+
+  /// No description provided for @calculatorPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculator'**
+  String get calculatorPageTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
