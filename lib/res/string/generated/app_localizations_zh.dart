@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -62,4 +61,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get loginFailedError => '登录失败，请重试。';
+
+  @override
+  String get calculatorPageTitle => '计算器';
 }
