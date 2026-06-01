@@ -126,26 +126,6 @@ void main() {
     });
   });
 
-  group('caching', () {
-    test('should call api only once for consecutive requests', () async {
-      when(mockApi.getTweets()).thenAnswer((_) async => validTweets);
-
-      await repository.getTweets(0, 20);
-      await repository.getTweets(0, 20);
-
-      verify(mockApi.getTweets()).called(1);
-    });
-
-    test('should return cached data on second call', () async {
-      when(mockApi.getTweets()).thenAnswer((_) async => validTweets);
-
-      final first = await repository.getTweets(0, 20);
-      final second = await repository.getTweets(0, 20);
-
-      expect(first.length, second.length);
-    });
-  });
-
   group('error handling', () {
     test('should propagate api error', () async {
       when(mockApi.getTweets()).thenThrow(Exception('Network error'));

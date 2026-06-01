@@ -57,7 +57,6 @@ lib # Flutter代码根目录
 │           │   ├── sender.dart       # 发送者数据模型
 │           │   └── tweet.dart        # 推文数据模型
 │           ├── repository_tweet.dart # 推文数据仓库
-│           ├── store_tweet.dart      # 推文数据缓存
 │           └── view_tweet.dart       # 推文列表 UI
 ├── widgets   # 跨页面共享的 UI 组件
 │   ├── async_loader # 异步加载模块

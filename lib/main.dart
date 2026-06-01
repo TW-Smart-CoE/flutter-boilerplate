@@ -17,7 +17,14 @@ final _app = MaterialApp.router(
   supportedLocales: AppLocalizations.supportedLocales,
 );
 
-final _queryCache = QueryCache();
+final _queryCache = QueryCache(
+  defaultQueryOptions: DefaultQueryOptions(
+    cacheDuration: Duration(minutes: 20),
+    refetchInterval: Duration(minutes: 5),
+    refetchOnMount: RefetchOnMount.stale,
+    staleDuration: Duration(minutes: 3),
+  ),
+);
 
 void main() {
   GlobalErrorHandler.run(() async {
